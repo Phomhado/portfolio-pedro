@@ -4,13 +4,30 @@ import Link from 'next/link';
 import { useState } from 'react';
 import ContactModal from './ContactModal';
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+interface HeaderProps {
+  className?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ className }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState<boolean>(false);
+
+  const handleMenuToggle = (): void => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const handleContactModalOpen = (): void => {
+    setIsContactModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
+  const handleContactModalClose = (): void => {
+    setIsContactModalOpen(false);
+  };
 
   return (
     <>
-      <header className="fixed w-full bg-white/80 backdrop-blur-md shadow-sm z-50">
+      <header className={`fixed w-full bg-white/80 backdrop-blur-md shadow-sm z-50 ${className ?? ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -23,19 +40,19 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               <Link 
-                href="#experience" 
+                href="/experience" 
                 className="text-gray-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
               >
                 Experience
               </Link>
               <Link 
-                href="#projects" 
+                href="/projects" 
                 className="text-gray-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
               >
                 Projects
               </Link>
               <button 
-                onClick={() => setIsContactModalOpen(true)}
+                onClick={handleContactModalOpen}
                 className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
               >
                 Contact
@@ -45,7 +62,8 @@ const Header = () => {
             {/* Mobile menu button */}
             <button
               className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none cursor-pointer"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={handleMenuToggle}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               <svg
                 className="h-6 w-6"
@@ -70,24 +88,21 @@ const Header = () => {
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <Link
-                  href="#experience"
+                  href="/experience"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 cursor-pointer"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Experience
                 </Link>
                 <Link
-                  href="#projects"
+                  href="/projects"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 cursor-pointer"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Projects
                 </Link>
                 <button
-                  onClick={() => {
-                    setIsContactModalOpen(true);
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={handleContactModalOpen}
                   className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 cursor-pointer"
                 >
                   Contact
@@ -100,7 +115,7 @@ const Header = () => {
 
       <ContactModal 
         isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+        onClose={handleContactModalClose} 
       />
     </>
   );
