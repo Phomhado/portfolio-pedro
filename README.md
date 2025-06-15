@@ -19,7 +19,6 @@ This portfolio is built using cutting-edge technologies and modern development p
 - 📱 Fully responsive layout
 - ⚡ Fast page loads and smooth transitions
 - 🎭 Beautiful animations and interactions
-- 🌙 Dark/Light mode support
 - 🔍 SEO optimized
 
 ## 🛠️ Development
@@ -41,5 +40,5 @@ Visit `http://localhost:3000` to see the result.
 Feel free to reach out to me through:
 - [LinkedIn](https://www.linkedin.com/in/pedro-henrique-de-oliveira-b4b984239)
 - [GitHub](https://github.com/Phomhado)
-- [Email](pedro.he.oli10@gmail.com)
+- pedro.he.oli10@gmail.com
 
