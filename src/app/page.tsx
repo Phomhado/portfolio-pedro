@@ -9,15 +9,16 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
+            className="space-y-4 sm:space-y-6"
           >
             <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ 
@@ -42,7 +43,7 @@ export default function Home() {
             </motion.h1>
             
             <motion.p 
-              className="text-xl sm:text-2xl text-gray-600 mb-8"
+              className="text-lg sm:text-xl md:text-2xl text-gray-600"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ 
@@ -55,7 +56,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ 
@@ -98,8 +99,8 @@ export default function Home() {
                 ease: [0.6, -0.05, 0.01, 0.99]
               }}
             >
-              <p className="text-gray-600 text-lg leading-relaxed">
-                I specialize in building modern, responsive web applications with React and Next.js, Node.js and Express.js. and Ruby on Rails!
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+                I specialize in building modern, responsive web applications with React and Next.js, Node.js and Express.js, and Ruby on Rails!
                 My focus is on creating intuitive user interfaces, smooth animations, and pixel-perfect designs, APIs RESTful and databases
                 that provide exceptional user experiences.
               </p>
