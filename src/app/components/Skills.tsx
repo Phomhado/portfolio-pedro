@@ -22,7 +22,13 @@ import {
   SiYarn,
   SiDocker,
   SiPostman,
-  SiStorybook
+  SiStorybook,
+  SiRuby,
+  SiNodedotjs,
+  SiExpress,
+  SiAmazon,
+  SiMysql,
+  SiMongodb
 } from 'react-icons/si';
 
 const Skills = () => {
@@ -31,11 +37,15 @@ const Skills = () => {
     { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
     { name: 'React', icon: SiReact, color: '#61DAFB' },
     { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
+    { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
+    { name: 'Express.js', icon: SiExpress, color: '#000000' },
+    { name: 'Ruby on Rails', icon: SiRuby, color: '#CC0000' },
     { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
     { name: 'Styled Components', icon: SiStyledcomponents, color: '#DB7093' },
   ];
 
   const tools = [
+    { name: 'AWS', icon: SiAmazon, color: '#232F3E' },
     { name: 'Design Systems', icon: SiFigma, color: '#F24E1E' },
     { name: 'CI/CD', icon: SiGithubactions, color: '#2088FF' },
     { name: 'Git', icon: SiGit, color: '#F05032' },
@@ -57,6 +67,11 @@ const Skills = () => {
     { name: 'Prettier', icon: SiPrettier, color: '#F7B93E' },
     { name: 'npm', icon: SiNpm, color: '#CB3837' },
     { name: 'Yarn', icon: SiYarn, color: '#2C8EBB' },
+  ];
+
+  const databases = [
+    { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+    { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
   ];
 
   const containerVariants = {
@@ -136,6 +151,7 @@ const Skills = () => {
           <SkillCard title="Tools & Practices" items={tools} />
           <SkillCard title="Testing & Quality" items={testing} />
           <SkillCard title="Development Tools" items={development} />
+          <SkillCard title="Databases" items={databases} />
         </div>
       </div>
     </section>

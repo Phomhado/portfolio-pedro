@@ -51,7 +51,7 @@ export default function Home() {
                 ease: [0.6, -0.05, 0.01, 0.99]
               }}
             >
-              A Frontend Developer passionate about creating beautiful and interactive web experiences
+              A Web Developer (Full-Stack focused on Front-End) passionate about creating beautiful and interactive web experiences
             </motion.p>
 
             <motion.div 
@@ -99,8 +99,8 @@ export default function Home() {
               }}
             >
               <p className="text-gray-600 text-lg leading-relaxed">
-                I specialize in building modern, responsive web applications with React and Next.js. 
-                My focus is on creating intuitive user interfaces, smooth animations, and pixel-perfect designs 
+                I specialize in building modern, responsive web applications with React and Next.js, Node.js and Express.js. and Ruby on Rails!
+                My focus is on creating intuitive user interfaces, smooth animations, and pixel-perfect designs, APIs RESTful and databases
                 that provide exceptional user experiences.
               </p>
             </motion.div>
