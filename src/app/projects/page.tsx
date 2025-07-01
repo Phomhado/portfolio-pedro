@@ -21,6 +21,13 @@ const projects: Project[] = [
     technologies: ['Ruby', 'Rails', 'REST API', 'CRUD Operations'],
     githubUrl: 'https://github.com/Phomhado/devotional-api',
   },
+  {
+    id: 'todo-webapp',
+    title: 'To-Do Webapp',
+    description: 'A full-stack to-do application (in progress) with a Ruby on Rails and PostgreSQL backend, and a TypeScript/Next.js frontend. Features include user authentication (login), JWT-based security, and full CRUD operations for managing tasks.',
+    technologies: ['Ruby', 'Rails', 'PostgreSQL', 'TypeScript', 'Next.js', 'JWT', 'CRUD', 'Authentication'],
+    githubUrl: 'https://github.com/Phomhado/todo-app', 
+  },
 ];
 
 export default function Projects() {

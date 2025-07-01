@@ -52,7 +52,7 @@ export default function Home() {
                 ease: [0.6, -0.05, 0.01, 0.99]
               }}
             >
-              A Web Developer (Full-Stack focused on Front-End) passionate about creating beautiful and interactive web experiences
+              A Web Developer passionate about creating beautiful and interactive web experiences
             </motion.p>
 
             <motion.div 
