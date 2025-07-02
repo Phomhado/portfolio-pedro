@@ -28,8 +28,11 @@ import {
   SiExpress,
   SiAmazon,
   SiMysql,
-  SiMongodb
+  SiMongodb,
+  SiPostgresql,
+  SiRubyonrails
 } from 'react-icons/si';
+
 
 const Skills = () => {
   const languages = [
@@ -58,6 +61,7 @@ const Skills = () => {
     { name: 'Jest', icon: SiJest, color: '#C21325' },
     { name: 'Testing Library', icon: SiTestinglibrary, color: '#E33332' },
     { name: 'Storybook', icon: SiStorybook, color: '#FF4785' },
+    { name: 'RSpec',  icon: SiRubyonrails, color: '#CE2D2D' },
   ];
 
   const development = [
@@ -72,6 +76,7 @@ const Skills = () => {
   const databases = [
     { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
     { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+    { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
   ];
 
   const containerVariants = {
