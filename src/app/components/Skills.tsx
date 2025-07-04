@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { DiJava } from 'react-icons/di';
 import { 
   SiTypescript, 
   SiReact, 
@@ -30,7 +31,8 @@ import {
   SiMysql,
   SiMongodb,
   SiPostgresql,
-  SiRubyonrails
+  SiRubyonrails,
+  SiSpringboot
 } from 'react-icons/si';
 
 
@@ -43,6 +45,8 @@ const Skills = () => {
     { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
     { name: 'Express.js', icon: SiExpress, color: '#000000' },
     { name: 'Ruby on Rails', icon: SiRuby, color: '#CC0000' },
+    { name: 'Java', icon: DiJava, color: '#007396' },
+    { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F' },
     { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
     { name: 'Styled Components', icon: SiStyledcomponents, color: '#DB7093' },
   ];
