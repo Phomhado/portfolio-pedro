@@ -12,11 +12,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-bold bg-blue-600 bg-clip-text text-transparent">
               PEDRO OLIVEIRA
             </h3>
             <p className="text-sm text-gray-400">
-              Creating beautiful and interactive web experiences
+              Coding it and loving it!
             </p>
           </div>
 
@@ -66,7 +66,7 @@ const Footer = () => {
                 <FaGithub className="w-6 h-6" />
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/pedro-henrique-de-oliveira-b4b984239"
+                href="https://www.linkedin.com/in/pedro-he-oli-dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"

@@ -17,14 +17,14 @@ const projects: Project[] = [
   {
     id: 'devotional-api',
     title: 'Devotional API',
-    description: 'A RESTful API built with Ruby that allows users to perform CRUD operations on devotionals. Each devotional includes a verse, a quick message, and a title, providing a complete spiritual resource management system.',
+    description: 'A RESTful API built with Ruby that allows users to perform CRUD operations on devotionals. Each devotional includes a verse, a quick message, and a title, providing a complete spiritual resource management system. (P.S: For now I need to add all devotionals manually, but that will change soon)',
     technologies: ['Ruby', 'Rails', 'REST API', 'CRUD Operations'],
     githubUrl: 'https://github.com/Phomhado/devotional-api',
   },
   {
     id: 'todo-webapp',
-    title: 'To-Do Webapp',
-    description: 'A full-stack to-do application (in progress) with a Ruby on Rails and PostgreSQL backend, and a TypeScript/Next.js frontend. Features include user authentication (login), JWT-based security, and full CRUD operations for managing tasks.',
+    title: 'To-Do Webapp (In progress)',
+    description: 'A full-stack to-do application (in progress) with a Ruby on Rails/PostgreSQL backend and a TypeScript/Next.js frontend. Features include user authentication (login), JWT-based security, and full CRUD operations for managing tasks.',
     technologies: ['Ruby', 'Rails', 'PostgreSQL', 'TypeScript', 'Next.js', 'JWT', 'CRUD', 'Authentication'],
     githubUrl: 'https://github.com/Phomhado/todo-app', 
   },
@@ -54,7 +54,7 @@ export default function Projects() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Here are some of the projects I've built. Each one represents a learning journey and a solution to real-world problems.
+            Here are some of the projects I've built! Some of them are still being built, so be patient!
           </motion.p>
         </motion.div>
 

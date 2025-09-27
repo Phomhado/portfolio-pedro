@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DiJava } from 'react-icons/di';
+
 import { 
   SiTypescript, 
   SiReact, 
@@ -25,31 +25,33 @@ import {
   SiPostman,
   SiStorybook,
   SiRuby,
-  SiNodedotjs,
-  SiExpress,
   SiAmazon,
   SiMysql,
   SiMongodb,
   SiPostgresql,
   SiRubyonrails,
-  SiSpringboot
+  SiRust,
+  SiCplusplus,
+  SiC
 } from 'react-icons/si';
 
 
 const Skills = () => {
-  const languages = [
+  const webdev = [
     { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
     { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
     { name: 'React', icon: SiReact, color: '#61DAFB' },
     { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
-    { name: 'Node.js', icon: SiNodedotjs, color: '#339933' },
-    { name: 'Express.js', icon: SiExpress, color: '#000000' },
-    { name: 'Ruby on Rails', icon: SiRuby, color: '#CC0000' },
-    { name: 'Java', icon: DiJava, color: '#007396' },
-    { name: 'Spring Boot', icon: SiSpringboot, color: '#6DB33F' },
     { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
     { name: 'Styled Components', icon: SiStyledcomponents, color: '#DB7093' },
-  ];
+    { name: 'Ruby on Rails', icon: SiRuby, color: '#9d0000'}
+  ]; 
+
+  const lowlevel = [
+    { name: 'Rust', icon: SiRust, color: '#f74c00'},
+    { name: 'C', icon: SiC, color: '#00108c'},
+    { name: 'C++', icon: SiCplusplus, color: '#00108c'},
+  ]
 
   const tools = [
     { name: 'AWS', icon: SiAmazon, color: '#232F3E' },
@@ -75,6 +77,7 @@ const Skills = () => {
     { name: 'Prettier', icon: SiPrettier, color: '#F7B93E' },
     { name: 'npm', icon: SiNpm, color: '#CB3837' },
     { name: 'Yarn', icon: SiYarn, color: '#2C8EBB' },
+    { name: 'Cargo', icon: SiRust, color: '#b56d00'}
   ];
 
   const databases = [
@@ -151,12 +154,16 @@ const Skills = () => {
             Skills & Expertise
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Technologies and tools I use to bring ideas to life
+            Technologies and tools I use to bring ideas to life! As a Software Engineer, I spend much time studying Algorithms, training my problem-solving skills and also training my way of thinking into how a computer thinks! These tech I listed below are tools, and as tools, I know maaany more Programming languages, Dev tools... But I decided to list only those which I am proficient and more comfortable working with!
+            <br />
+            <br />
+            My favorite languages are: Rust (by far my favorite!), C++ and Ruby on Rails. I also like JS/TS, specially how versatile JS is! But I have way more fun creating something with C and C++ using Arduino, solving challenges with Rust or even doing Full-Stack web apps with Rails
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <SkillCard title="Languages & Frameworks" items={languages} />
+          <SkillCard title="Web Development" items={webdev} />
+          <SkillCard title="Low-Level" items={lowlevel} />
           <SkillCard title="Tools & Practices" items={tools} />
           <SkillCard title="Testing & Quality" items={testing} />
           <SkillCard title="Development Tools" items={development} />

@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center cursor-pointer">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-blue-600 bg-clip-text text-transparent">
                 PEDRO OLIVEIRA
               </span>
             </Link>

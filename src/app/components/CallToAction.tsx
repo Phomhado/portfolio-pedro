@@ -15,7 +15,7 @@ const CallToAction = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Want to know more?
+            Wanna talk or have any questions?
           </motion.h2>
           
           <motion.p 
@@ -25,7 +25,7 @@ const CallToAction = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Explore my professional journey and discover the projects I've worked on
+            You can explore my journey as a Dev and even see some of my projects below!
           </motion.p>
 
           <motion.div 

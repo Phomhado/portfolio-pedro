@@ -29,7 +29,7 @@ export default function Home() {
             >
               Hi, I'm{' '}
               <motion.span 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="bg-blue-600 bg-clip-text text-transparent"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ 
@@ -52,7 +52,7 @@ export default function Home() {
                 ease: [0.6, -0.05, 0.01, 0.99]
               }}
             >
-              A Web Developer passionate about creating beautiful and interactive web experiences
+              A Software Engineer that loves programming and creating new stuff
             </motion.p>
 
             <motion.div 
@@ -100,9 +100,7 @@ export default function Home() {
               }}
             >
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                I specialize in building modern, responsive web applications with React and Next.js, Node.js and Express.js, and Ruby on Rails!
-                My focus is on creating intuitive user interfaces, smooth animations, and pixel-perfect designs, APIs RESTful and databases
-                that provide exceptional user experiences.
+                I started coding back in 2019/2020. I was in the middle of high school and after writing some code at my Robotics class (Lego Mindstorm Ev3! I used to love it) I decided to give it a try on my computer at home. That is when I learnt HTML and CSS mainly. I decided to pursue a Software Engineering Bachelor's degree after I finished high school and well, the rest is history. I work as a Web Dev, but I also love low-level programming and cool concepts like Robotics, Embedded Systems, Sistems Engineering...
               </p>
             </motion.div>
           </motion.div>
