@@ -77,7 +77,7 @@ export default function Home() {
                 <span>GitHub</span>
               </motion.a>
               <motion.a
-                href="https://www.linkedin.com/in/pedro-henrique-de-oliveira-b4b984239"
+                href="https://www.linkedin.com/in/pedro-he-oli-dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"

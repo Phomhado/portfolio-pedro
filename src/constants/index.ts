@@ -27,7 +27,7 @@ export const CONTACT_INFO: ContactInfo[] = [
     type: 'linkedin',
     label: 'LinkedIn',
     value: 'LinkedIn Profile',
-    href: 'https://www.linkedin.com/in/pedro-henrique-de-oliveira-b4b984239',
+    href: 'https://www.linkedin.com/in/pedro-he-oli-dev',
     icon: FaLinkedin
   }
 ];
