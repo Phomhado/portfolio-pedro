@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
@@ -131,18 +132,18 @@ export default function Projects() {
             More projects coming soon! I'm constantly working on new ideas and learning new technologies.
           </p>
           <div className="flex justify-center gap-4">
-            <a
+            <Link
               href="/experience"
               className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               View Experience
-            </a>
-            <a
+            </Link>
+            <Link
               href="/"
               className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
             >
               Back to Home
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
