@@ -1,15 +1,18 @@
+import {ReactNode} from "react";
+import {ComponentType} from "react";
+
 export interface ContactInfo {
   type: 'email' | 'phone' | 'github' | 'linkedin';
   label: string;
   value: string;
   href: string;
-  icon: React.ComponentType;
+  icon: ComponentType;
 }
 
 export interface SocialLink {
   href: string;
   label: string;
-  icon: React.ComponentType;
+  icon: ComponentType;
 }
 
 export interface NavItem {
@@ -20,6 +23,6 @@ export interface NavItem {
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
   title?: string;
 } 
