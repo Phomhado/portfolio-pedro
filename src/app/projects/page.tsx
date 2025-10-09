@@ -11,7 +11,6 @@ interface Project {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
-  image?: string;
 }
 
 const projects: Project[] = [
