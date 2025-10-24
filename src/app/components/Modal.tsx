@@ -31,11 +31,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all">
+      <div className="bg-card text-card-foreground relative mx-4 w-full max-w-md transform rounded-2xl border border-muted p-8 shadow-2xl shadow-black/20 transition-all">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+          className="absolute right-4 top-4 cursor-pointer text-muted-foreground transition-colors hover:text-foreground"
           aria-label="Close modal"
         >
           <svg
@@ -53,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
 
         {/* Content */}
         <div className="space-y-6">
-          {title && <h2 className="text-2xl font-bold text-gray-900">{title}</h2>}
+          {title && <h2 className="text-2xl font-bold text-foreground">{title}</h2>}
           {children}
         </div>
       </div>

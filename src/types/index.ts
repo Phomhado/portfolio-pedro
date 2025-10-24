@@ -6,13 +6,13 @@ export interface ContactInfo {
   label: string;
   value: string;
   href: string;
-  icon: ComponentType;
+  icon: ComponentType<{ className?: string }>;
 }
 
 export interface SocialLink {
   href: string;
   label: string;
-  icon: ComponentType;
+  icon: ComponentType<{ className?: string }>;
 }
 
 export interface NavItem {

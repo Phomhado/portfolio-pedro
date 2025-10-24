@@ -5,11 +5,11 @@ import Link from 'next/link';
 
 const CallToAction = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <motion.h2 
-            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6"
+    <section className="bg-page py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center text-foreground">
+          <motion.h2
+            className="mb-6 text-3xl font-bold sm:text-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -18,8 +18,8 @@ const CallToAction = () => {
             Wanna talk or have any questions?
           </motion.h2>
           
-          <motion.p 
-            className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto"
+          <motion.p
+            className="text-muted-foreground mx-auto mb-12 max-w-2xl text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -35,9 +35,9 @@ const CallToAction = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <Link 
+            <Link
               href="/experience"
-              className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg overflow-hidden"
+              className="group relative overflow-hidden rounded-lg bg-primary px-8 py-4 text-primary-foreground"
             >
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
@@ -58,9 +58,9 @@ const CallToAction = () => {
               </span>
             </Link>
 
-            <Link 
+            <Link
               href="/projects"
-              className="group relative px-8 py-4 bg-white text-gray-900 rounded-lg border-2 border-gray-200 hover:border-blue-600 transition-colors"
+              className="group relative rounded-lg border-2 border-muted bg-card px-8 py-4 text-foreground transition-colors hover:border-blue-500 hover:bg-card-soft"
             >
               <span className="relative flex items-center gap-2">
                 See Projects

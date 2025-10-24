@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import ContactModal from './ContactModal';
-import {NAV_ITEMS} from "@/constants";
+import ThemeToggle from './ThemeToggle';
+import { NAV_ITEMS } from '@/constants';
 
 interface HeaderProps {
     className?: string;
@@ -24,30 +25,34 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
 
     return (
         <>
-            <header className={`fixed w-full bg-white/80 backdrop-blur-md shadow-sm z-50 ${className ?? ''}`}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-16">
+            <header
+                className={`fixed z-50 w-full border-b border-muted backdrop-blur-md shadow-sm ${className ?? ''}`}
+                style={{ background: 'var(--header-background)' }}
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="flex h-16 items-center justify-between">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center cursor-pointer">
-              <span className="text-2xl font-bold bg-blue-600 bg-clip-text text-transparent">
-                PEDRO OLIVEIRA
-              </span>
+                        <Link href="/" className="flex cursor-pointer items-center">
+                            <span className="bg-blue-600 bg-clip-text text-2xl font-bold text-transparent">
+                                PEDRO OLIVEIRA
+                            </span>
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden md:flex items-center space-x-8">
+                        <nav className="hidden items-center space-x-4 md:flex">
                             {NAV_ITEMS.map((item) => (
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    className="text-gray-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
+                                    className="cursor-pointer text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
                                 >
                                     {item.label}
                                 </Link>
                             ))}
+                            <ThemeToggle />
                             <button
                                 onClick={handleContactModalOpen}
-                                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
+                                className="bg-primary text-primary-foreground hover:bg-primary-soft cursor-pointer rounded-md px-4 py-2 text-sm font-medium transition-colors duration-200"
                             >
                                 Contact
                             </button>
@@ -55,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
 
                         {/* Mobile menu button */}
                         <button
-                            className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none cursor-pointer"
+                            className="cursor-pointer rounded-md p-2 text-muted-foreground transition-colors duration-200 hover:text-foreground focus:outline-none md:hidden"
                             onClick={handleMenuToggle}
                             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                         >
@@ -80,20 +85,23 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
                     {/* Mobile Navigation */}
                     {isMenuOpen && (
                         <div className="md:hidden">
-                            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                                 {NAV_ITEMS.map((item) => (
                                     <Link
                                         key={item.href}
                                         href={item.href}
-                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 cursor-pointer"
+                                        className="hover:bg-card-soft block cursor-pointer rounded-md px-3 py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         {item.label}
                                     </Link>
                                 ))}
+                                <div className="px-3 py-2">
+                                    <ThemeToggle className="w-full" />
+                                </div>
                                 <button
                                     onClick={handleContactModalOpen}
-                                    className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 cursor-pointer"
+                                    className="hover:bg-card-soft w-full cursor-pointer rounded-md px-3 py-2 text-left text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                                 >
                                     Contact
                                 </button>

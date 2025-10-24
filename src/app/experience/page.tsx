@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 
 export default function Experience() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main className="min-h-screen bg-page pt-16 text-foreground">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">
+          <h1 className="mb-8 text-4xl font-bold">
             Professional Experience
           </h1>
           
@@ -24,16 +24,16 @@ export default function Experience() {
               className="relative pl-8 border-l-2 border-blue-600"
             >
               <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-600" />
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-gray-900">Frontend Developer</h3>
-                  <span className="text-sm text-gray-500">November 2023 - Present</span>
+              <div className="bg-card text-card-foreground rounded-lg p-6 shadow-sm shadow-black/10">
+                <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
+                  <h3 className="text-xl font-semibold text-foreground">Frontend Developer</h3>
+                  <span className="text-sm text-muted-foreground">November 2023 - Present</span>
                 </div>
                 <h4 className="text-lg text-blue-600 mb-2">Banco Bari</h4>
                 <div className="space-y-4">
                   <div>
-                    <h5 className="font-semibold text-gray-800 mb-2">Main Responsibilities:</h5>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    <h5 className="mb-2 font-semibold text-foreground">Main Responsibilities:</h5>
+                    <ul className="list-inside list-disc space-y-1 text-muted-foreground">
                       <li>Create and edit components and webpages</li>
                       <li>Develop landing pages</li>
                       <li>Debug and fix errors in the application</li>
@@ -50,33 +50,33 @@ export default function Experience() {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-semibold text-gray-800 mb-2">Notable Achievements:</h5>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    <h5 className="mb-2 font-semibold text-foreground">Notable Achievements:</h5>
+                    <ul className="list-inside list-disc space-y-1 text-muted-foreground">
                       <li>Created and maintained design system library</li>
                       <li>Developed logger library for better debugging and monitoring</li>
                     </ul>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     React
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     Next.js
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     TypeScript
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     Styled Components
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     Tailwind CSS
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     Git
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                  <span className="rounded-full border border-muted bg-card px-3 py-1 text-sm text-muted-foreground">
                     CI/CD
                   </span>
                 </div>

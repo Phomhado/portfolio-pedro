@@ -21,10 +21,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               href={contact.href}
               target={contact.type === 'email' || contact.type === 'phone' ? undefined : '_blank'}
               rel={contact.type === 'email' || contact.type === 'phone' ? undefined : 'noopener noreferrer'}
-              className="flex items-center space-x-3 text-gray-700 hover:text-blue-600 transition-colors cursor-pointer"
+              className="flex cursor-pointer items-center space-x-3 text-muted-foreground transition-colors hover:text-foreground"
             >
               <span className="h-5 w-5">
-                <Icon />
+                <Icon className="h-full w-full" />
               </span>
               <span>{contact.value}</span>
             </a>

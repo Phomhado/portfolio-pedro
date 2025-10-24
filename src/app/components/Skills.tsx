@@ -122,15 +122,15 @@ const Skills = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-white rounded-2xl p-8 shadow-lg"
+            className="bg-card text-card-foreground rounded-2xl p-8 shadow-lg shadow-black/5"
         >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">{title}</h3>
+            <h3 className="mb-6 text-2xl font-semibold text-foreground">{title}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                 {items.map((item) => (
                     <motion.div key={item.name} variants={itemVariants} className="group">
-                        <div className="flex flex-col items-center p-4 rounded-xl bg-gray-50 group-hover:bg-gray-100 transition-colors duration-200">
-                            <item.icon className="w-12 h-12 mb-3" style={{ color: item.color }} />
-                            <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                        <div className="bg-card hover:bg-card-soft flex flex-col items-center rounded-xl p-4 transition-colors duration-200">
+                            <item.icon className="mb-3 h-12 w-12" style={{ color: item.color }} />
+                            <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">{item.name}</span>
                         </div>
                     </motion.div>
                 ))}
@@ -139,17 +139,17 @@ const Skills = () => {
     );
 
     return (
-        <section id="skills" className="py-20 bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="skills" className="bg-page py-20">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
+                    className="mb-16 text-center"
                 >
-                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    <h2 className="mb-4 text-3xl font-bold sm:text-4xl">Skills & Expertise</h2>
+                    <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
                         Technologies and tools I use to bring ideas to life! As a Software Engineer, I spend much time studying Algorithms, training my problem-solving skills and also training my way of thinking into how a computer thinks! These tech I listed below are tools, and as tools, I know maaany more Programming languages, Dev tools... But I decided to list only those which I am proficient and more comfortable working with!
                         <br />
                         <br />
@@ -157,7 +157,7 @@ const Skills = () => {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
                     <SkillCard title="Web Development" items={webdev} />
                     <SkillCard title="Low-Level" items={lowlevel} />
                     <SkillCard title="Tools & Practices" items={tools} />
