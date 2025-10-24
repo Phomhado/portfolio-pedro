@@ -32,16 +32,16 @@ const projects: Project[] = [
 
 export default function Projects() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main className="min-h-screen bg-page pt-16 text-foreground">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-12 text-center"
         >
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
+          <motion.h1
+            className="mb-6 text-4xl font-bold md:text-6xl"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -52,7 +52,7 @@ export default function Projects() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="mx-auto max-w-3xl text-xl text-muted-foreground"
           >
             Here are some of the projects I've built! Some of them are still being built, so be patient!
           </motion.p>
@@ -62,7 +62,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -70,23 +70,23 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 * (index + 1) }}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+              className="bg-card text-card-foreground overflow-hidden rounded-xl border border-muted shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-black/10"
             >
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                <h3 className="mb-3 text-2xl font-bold text-foreground">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="mb-4 leading-relaxed text-muted-foreground">
                   {project.description}
                 </p>
-                
+
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Technologies Used:</h4>
+                  <h4 className="mb-2 text-sm font-semibold text-muted-foreground">Technologies Used:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium"
+                        className="rounded-full border border-muted bg-card px-3 py-1 text-sm font-medium text-muted-foreground"
                       >
                         {tech}
                       </span>
@@ -99,7 +99,7 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium"
+                    className="flex items-center gap-2 rounded-lg border border-muted bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-card-soft"
                   >
                     <FaGithub className="w-4 h-4" />
                     View Code
@@ -109,7 +109,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                      className="bg-primary hover:bg-primary-soft flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-primary-foreground transition-colors"
                     >
                       <FaExternalLinkAlt className="w-4 h-4" />
                       Live Demo
@@ -125,21 +125,21 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="text-center mt-12"
+          className="mt-12 text-center"
         >
-          <p className="text-gray-600 mb-6">
+          <p className="mb-6 text-muted-foreground">
             More projects coming soon! I'm constantly working on new ideas and learning new technologies.
           </p>
           <div className="flex justify-center gap-4">
             <Link
               href="/experience"
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-primary hover:bg-primary-soft rounded-lg px-6 py-3 text-primary-foreground transition-colors"
             >
               View Experience
             </Link>
             <Link
               href="/"
-              className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+              className="rounded-lg border border-muted bg-card px-6 py-3 text-foreground transition-colors hover:bg-card-soft"
             >
               Back to Home
             </Link>
