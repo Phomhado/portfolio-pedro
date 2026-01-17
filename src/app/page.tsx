@@ -100,7 +100,7 @@ export default function Home() {
               }}
             >
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                I started coding back in 2019/2020. I was in the middle of high school and after writing some code at my Robotics class (Lego Mindstorm Ev3! I used to love it) I decided to give it a try on my computer at home. That is when I learnt HTML and CSS mainly. I decided to pursue a Software Engineering Bachelor's degree after I finished high school and well, the rest is history. I work as a Web Dev, but I also love low-level programming and cool concepts like Robotics, Embedded Systems, Sistems Engineering...
+                I am a Software Engineer with a strong foundation in Web Development and a deep passion for Systems Engineering. Currently, I specialize in building high-performance Web interfaces while exploring the boundaries of Low-Level programming with Rust and C++. I believe that understanding the machine is key to building better, more efficient software.
               </p>
             </motion.div>
           </motion.div>

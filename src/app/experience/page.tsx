@@ -52,8 +52,8 @@ export default function Experience() {
                   <div>
                     <h5 className="font-semibold text-gray-800 mb-2">Notable Achievements:</h5>
                     <ul className="list-disc list-inside text-gray-600 space-y-1">
-                      <li>Created and maintained design system library</li>
-                      <li>Developed logger library for better debugging and monitoring</li>
+                      <li>Co-architected Barihaus, a React Design System based on Ant Design and Tailwind CSS, utilizing atomic design principles. Established a centralized Design Token system to enforce UI consistency and reduce frontend development cycles by eliminating hard-coded values and accelerating component reuse through Storybook</li>
+                      <li>Developed a cross-platform NPM logging library in collaboration with Backend engineers, implementing 4 severity levels (Warning, Fatal, Error, Info) and automated DataDog integration. This improved production incident response time by providing real-time telemetry on Browser metadata, User IDs, and environment-specific logs across multiple products."</li>
                     </ul>
                   </div>
                 </div>

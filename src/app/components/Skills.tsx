@@ -150,10 +150,9 @@ const Skills = () => {
                 >
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Technologies and tools I use to bring ideas to life! As a Software Engineer, I spend much time studying Algorithms, training my problem-solving skills and also training my way of thinking into how a computer thinks! These tech I listed below are tools, and as tools, I know maaany more Programming languages, Dev tools... But I decided to list only those which I am proficient and more comfortable working with!
-                        <br />
-                        <br />
-                        My favorite languages are: Rust (by far my favorite!), C++ and Ruby on Rails. I also like JS/TS, specially how versatile JS is! But I have way more fun creating something with C and C++ using Arduino, solving challenges with Rust or even doing Full-Stack web apps with Rails
+                        I view technologies as specialized tools to solve complex architectural problems. My core expertise lies in Full-Stack Web Development, where I leverage TypeScript and Ruby on Rails to build scalable applications.
+
+However, my true passion lies in Systems Programming. Currently deepening my knowledge in Rust and C++, focusing on memory safety, pointers, and systems architecture.
                     </p>
                 </motion.div>
 
