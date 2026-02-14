@@ -28,6 +28,13 @@ const projects: Project[] = [
     technologies: ['Ruby', 'Rails', 'PostgreSQL', 'TypeScript', 'Next.js', 'JWT', 'CRUD', 'Authentication'],
     githubUrl: 'https://github.com/Phomhado/todo-app', 
   },
+  {
+    id: 'sentinel',
+    title: 'Sentinel (In progress)',
+    description: 'Sentinel is a Task Management webapp made with Rust on the Back-End (via Tauri framework) and React and TypeScript on the Front-End. You can do things like monitoring your memory usage, cpu usage, disk usage and even terminate tasks. It includes a live update of your system!',
+    technologies: ['Rust', 'Tauri', 'TypeScript', 'React', 'Vite', 'Task Manager'],
+    githubUrl: 'https://github.com/Phomhado/sentinel', 
+  },
 ];
 
 export default function Projects() {
@@ -81,7 +88,7 @@ export default function Projects() {
                 </p>
                 
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Technologies Used:</h4>
+                  <h4 className="text-sm font-semibold text-gray-700 mb-2">Technologies and topics used:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
