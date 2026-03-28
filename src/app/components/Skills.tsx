@@ -2,171 +2,209 @@
 
 import { motion } from 'framer-motion';
 import { IconType } from 'react-icons';
-
 import {
-    SiTypescript,
-    SiReact,
-    SiNextdotjs,
-    SiJavascript,
-    SiTailwindcss,
-    SiStyledcomponents,
-    SiGit,
-    SiGithubactions,
-    SiVercel,
-    SiFigma,
-    SiJest,
-    SiTestinglibrary,
-    SiRedux,
-    SiWebpack,
-    SiEslint,
-    SiPrettier,
-    SiNpm,
-    SiYarn,
-    SiDocker,
-    SiPostman,
-    SiStorybook,
-    SiRuby,
-    SiAmazon,
-    SiMysql,
-    SiMongodb,
-    SiPostgresql,
-    SiRubyonrails,
-    SiRust,
-    SiCplusplus,
-    SiC,
+  SiTypescript, SiReact, SiNextdotjs, SiJavascript, SiTailwindcss,
+  SiStyledcomponents, SiGit, SiGithubactions, SiVercel, SiFigma,
+  SiJest, SiTestinglibrary, SiRedux, SiWebpack, SiEslint, SiPrettier,
+  SiNpm, SiYarn, SiDocker, SiPostman, SiStorybook, SiRuby, SiAmazon,
+  SiMysql, SiMongodb, SiPostgresql, SiRubyonrails, SiRust, SiCplusplus, SiC,
 } from 'react-icons/si';
 
-// === Types ===
-export type SkillItem = {
-    name: string;
-    icon: IconType;
-    color: string;
+// ─── Types ────────────────────────────────────────────────────────────────────
+type SkillItem = {
+  name: string;
+  icon: IconType;
+  color: string;
 };
 
-export type SkillCardProps = {
-    title: string;
-    items: SkillItem[];
+type SkillCategory = {
+  title: string;
+  items: SkillItem[];
 };
 
-const Skills = () => {
-    // You can keep these as const to preserve literal types for name/color.
-    const webdev: SkillItem[] = [
-        { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
-        { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-        { name: 'React', icon: SiReact, color: '#61DAFB' },
-        { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
-        { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
-        { name: 'Styled Components', icon: SiStyledcomponents, color: '#DB7093' },
-        { name: 'Ruby on Rails', icon: SiRuby, color: '#9d0000' },
-    ];
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const CATEGORIES: SkillCategory[] = [
+  {
+    title: 'Web Development',
+    items: [
+      { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+      { name: 'React', icon: SiReact, color: '#61DAFB' },
+      { name: 'Next.js', icon: SiNextdotjs, color: '#F0F0F0' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Styled Comp.', icon: SiStyledcomponents, color: '#DB7093' },
+      { name: 'Ruby on Rails', icon: SiRuby, color: '#CC342D' },
+    ],
+  },
+  {
+    title: 'Low-Level',
+    items: [
+      { name: 'Rust', icon: SiRust, color: '#F74C00' },
+      { name: 'C', icon: SiC, color: '#A8B9CC' },
+      { name: 'C++', icon: SiCplusplus, color: '#00599C' },
+    ],
+  },
+  {
+    title: 'Tools & Practices',
+    items: [
+      { name: 'AWS', icon: SiAmazon, color: '#FF9900' },
+      { name: 'Design Systems', icon: SiFigma, color: '#F24E1E' },
+      { name: 'CI/CD', icon: SiGithubactions, color: '#2088FF' },
+      { name: 'Git', icon: SiGit, color: '#F05032' },
+      { name: 'Vercel', icon: SiVercel, color: '#F0F0F0' },
+      { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+      { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
+    ],
+  },
+  {
+    title: 'Testing & Quality',
+    items: [
+      { name: 'Jest', icon: SiJest, color: '#C21325' },
+      { name: 'Testing Library', icon: SiTestinglibrary, color: '#E33332' },
+      { name: 'Storybook', icon: SiStorybook, color: '#FF4785' },
+      { name: 'RSpec', icon: SiRubyonrails, color: '#CE2D2D' },
+    ],
+  },
+  {
+    title: 'Dev Tools',
+    items: [
+      { name: 'Redux', icon: SiRedux, color: '#764ABC' },
+      { name: 'Webpack', icon: SiWebpack, color: '#8DD6F9' },
+      { name: 'ESLint', icon: SiEslint, color: '#4B32C3' },
+      { name: 'Prettier', icon: SiPrettier, color: '#F7B93E' },
+      { name: 'npm', icon: SiNpm, color: '#CB3837' },
+      { name: 'Yarn', icon: SiYarn, color: '#2C8EBB' },
+      { name: 'Cargo', icon: SiRust, color: '#F74C00' },
+    ],
+  },
+  {
+    title: 'Databases',
+    items: [
+      { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+      { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+      { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
+    ],
+  },
+];
 
-    const lowlevel: SkillItem[] = [
-        { name: 'Rust', icon: SiRust, color: '#f74c00' },
-        { name: 'C', icon: SiC, color: '#00108c' },
-        { name: 'C++', icon: SiCplusplus, color: '#00108c' },
-    ];
+// ─── Skill Item ───────────────────────────────────────────────────────────────
+const SkillTile = ({ item }: { item: SkillItem }) => (
+  <div
+    className="skill-tile flex flex-col items-center justify-center p-4 gap-2"
+    style={{
+      borderRight: '1px solid var(--border-hi)',
+      borderBottom: '1px solid var(--border-hi)',
+    }}
+  >
+    <item.icon
+      className="w-7 h-7 skill-tile-icon"
+      style={{ color: item.color }}
+    />
+    <span
+      className="skill-tile-label font-mono text-[0.6rem] font-medium tracking-wider text-center leading-tight"
+      style={{ color: 'var(--muted)' }}
+    >
+      {item.name}
+    </span>
+  </div>
+);
 
-    const tools: SkillItem[] = [
-        { name: 'AWS', icon: SiAmazon, color: '#232F3E' },
-        { name: 'Design Systems', icon: SiFigma, color: '#F24E1E' },
-        { name: 'CI/CD', icon: SiGithubactions, color: '#2088FF' },
-        { name: 'Git', icon: SiGit, color: '#F05032' },
-        { name: 'Vercel', icon: SiVercel, color: '#000000' },
-        { name: 'Docker', icon: SiDocker, color: '#2496ED' },
-        { name: 'Postman', icon: SiPostman, color: '#FF6C37' },
-    ];
+// ─── Skill Card ───────────────────────────────────────────────────────────────
+const SkillCard = ({ category, index }: { category: SkillCategory; index: number }) => (
+  <motion.div
+    className="relative overflow-hidden p-8"
+    style={{
+      borderRight: '1px solid var(--border-hi)',
+      borderBottom: '1px solid var(--border-hi)',
+    }}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.05 }}
+  >
+    {/* Background number */}
+    <span
+      className="absolute top-2 right-4 font-mono font-black select-none pointer-events-none leading-none"
+      style={{
+        fontSize: '5rem',
+        color: 'transparent',
+        WebkitTextStroke: '1px var(--border-hi)',
+      }}
+    >
+      {String(index + 1).padStart(2, '0')}
+    </span>
 
-    const testing: SkillItem[] = [
-        { name: 'Jest', icon: SiJest, color: '#C21325' },
-        { name: 'Testing Library', icon: SiTestinglibrary, color: '#E33332' },
-        { name: 'Storybook', icon: SiStorybook, color: '#FF4785' },
-        { name: 'RSpec', icon: SiRubyonrails, color: '#CE2D2D' },
-    ];
+    {/* Category label */}
+    <p
+      className="font-mono text-xs tracking-[0.2em] uppercase mb-6 relative z-10"
+      style={{ color: 'var(--muted)' }}
+    >
+      {String(index + 1).padStart(2, '0')} · {category.title}
+    </p>
 
-    const development: SkillItem[] = [
-        { name: 'Redux', icon: SiRedux, color: '#764ABC' },
-        { name: 'Webpack', icon: SiWebpack, color: '#8DD6F9' },
-        { name: 'ESLint', icon: SiEslint, color: '#4B32C3' },
-        { name: 'Prettier', icon: SiPrettier, color: '#F7B93E' },
-        { name: 'npm', icon: SiNpm, color: '#CB3837' },
-        { name: 'Yarn', icon: SiYarn, color: '#2C8EBB' },
-        { name: 'Cargo', icon: SiRust, color: '#b56d00' },
-    ];
+    {/* Skills grid */}
+    <div
+      className="grid grid-cols-3 sm:grid-cols-4 relative z-10"
+      style={{ borderLeft: '1px solid var(--border-hi)', borderTop: '1px solid var(--border-hi)' }}
+    >
+      {category.items.map((item) => (
+        <SkillTile key={item.name} item={item} />
+      ))}
+    </div>
+  </motion.div>
+);
 
-    const databases: SkillItem[] = [
-        { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
-        { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
-        { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
-    ];
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1 },
-        },
-    } as const;
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: { duration: 0.5 },
-        },
-    } as const;
-
-    const SkillCard = ({ title, items }: SkillCardProps) => (
-        <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl p-8 shadow-lg"
+// ─── Section ──────────────────────────────────────────────────────────────────
+export default function Skills() {
+  return (
+    <section
+      id="skills"
+      className="py-20 px-6 sm:px-10 lg:px-16"
+      style={{ borderBottom: '1px solid var(--border-hi)' }}
+    >
+      {/* Header */}
+      <motion.div
+        className="mb-16"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <span
+          className="font-mono text-xs tracking-[0.25em] uppercase block mb-4"
+          style={{ color: 'var(--muted)' }}
         >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">{title}</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-                {items.map((item) => (
-                    <motion.div key={item.name} variants={itemVariants} className="group">
-                        <div className="flex flex-col items-center p-4 rounded-xl bg-gray-50 group-hover:bg-gray-100 transition-colors duration-200">
-                            <item.icon className="w-12 h-12 mb-3" style={{ color: item.color }} />
-                            <span className="text-sm font-medium text-gray-700">{item.name}</span>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        </motion.div>
-    );
+          02 / Skills
+        </span>
+        <h2
+          className="font-mono font-black tracking-tight"
+          style={{
+            fontSize: 'clamp(2rem, 5vw, 4rem)',
+            color: 'var(--fg)',
+          }}
+        >
+          SKILLS &amp;{' '}
+          <span style={{ color: 'var(--accent-r)' }}>EXPERTISE</span>
+        </h2>
+        <div
+          className="mt-6 max-w-xl text-sm leading-relaxed"
+          style={{ color: 'var(--muted)' }}
+        >
+          Technologies are tools. My core is Full-Stack Web Development with
+          TypeScript and Ruby on Rails. And I have a deep passion in Systems
+          Programming with Rust and C++.
+        </div>
+      </motion.div>
 
-    return (
-        <section id="skills" className="py-20 bg-gray-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        I view technologies as specialized tools to solve complex architectural problems. My core expertise lies in Full-Stack Web Development, where I leverage TypeScript and Ruby on Rails to build scalable applications.
-
-However, my true passion lies in Systems Programming. Currently deepening my knowledge in Rust and C++, focusing on memory safety, pointers, and systems architecture.
-                    </p>
-                </motion.div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <SkillCard title="Web Development" items={webdev} />
-                    <SkillCard title="Low-Level" items={lowlevel} />
-                    <SkillCard title="Tools & Practices" items={tools} />
-                    <SkillCard title="Testing & Quality" items={testing} />
-                    <SkillCard title="Development Tools" items={development} />
-                    <SkillCard title="Databases" items={databases} />
-                </div>
-            </div>
-        </section>
-    );
-};
-
-export default Skills;
+      {/* Grid */}
+      <div
+        className="grid grid-cols-1 md:grid-cols-2"
+        style={{ borderTop: '1px solid var(--border-hi)', borderLeft: '1px solid var(--border-hi)' }}
+      >
+        {CATEGORIES.map((cat, i) => (
+          <SkillCard key={cat.title} category={cat} index={i} />
+        ))}
+      </div>
+    </section>
+  );
+}

@@ -1,100 +1,124 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import Link from 'next/link';
-import {NAV_ITEMS} from "@/constants";
+import { NAV_ITEMS } from '@/constants';
 
+const SOCIALS = [
+  { href: 'https://github.com/Phomhado', icon: FaGithub, label: 'GitHub' },
+  {
+    href: 'https://www.linkedin.com/in/pedro-he-oli-dev',
+    icon: FaLinkedin,
+    label: 'LinkedIn',
+  },
+  { href: 'mailto:pedro.he.oli10@gmail.com', icon: FaEnvelope, label: 'Email' },
+];
 
-const Footer = () => {
-    const currentYear = new Date().getFullYear();
+export default function Footer() {
+  const year = new Date().getFullYear();
 
-    return (
-        <footer className="bg-[#0a0a0a] text-gray-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Brand Section */}
-                    <div className="space-y-4">
-                        <h3 className="text-2xl font-bold bg-blue-600 bg-clip-text text-transparent">
-                            PEDRO OLIVEIRA
-                        </h3>
-                        <p className="text-sm text-gray-400">
-                            Coding it and loving it!
-                        </p>
-                    </div>
+  return (
+    <footer
+      style={{
+        background: 'var(--bg)',
+        borderTop: '1px solid var(--border-hi)',
+      }}
+    >
+      <div className="px-6 sm:px-10 lg:px-16 py-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="font-mono text-sm font-bold tracking-[0.1em] uppercase transition-colors duration-200"
+            style={{ color: 'var(--fg)' }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.color = 'var(--accent-r)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.color = 'var(--fg)';
+            }}
+          >
+            PO<span style={{ color: 'var(--accent-r)' }}>_</span>
+          </Link>
 
-                    {/* Quick Links */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">Quick Links</h4>
-                        <ul className="space-y-2">
-                            {/* Skills link extra */}
-                            <li>
-                                <Link
-                                    href="/#skills"
-                                    className="text-gray-400 hover:text-white transition-colors"
-                                >
-                                    Skills
-                                </Link>
-                            </li>
+          {/* Nav links */}
+          <nav className="flex items-center gap-6">
+            <Link
+              href="/#skills"
+              className="font-mono text-xs tracking-[0.15em] uppercase transition-colors duration-200"
+              style={{ color: 'var(--muted)' }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.color = 'var(--fg)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.color = 'var(--muted)';
+              }}
+            >
+              Skills
+            </Link>
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="font-mono text-xs tracking-[0.15em] uppercase transition-colors duration-200"
+                style={{ color: 'var(--muted)' }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = 'var(--fg)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = 'var(--muted)';
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-                            {NAV_ITEMS.map((item) => (
-                                <li key={item.href}>
-                                    <Link
-                                        href={item.href}
-                                        className="text-gray-400 hover:text-white transition-colors"
-                                    >
-                                        {item.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+          {/* Socials */}
+          <div className="flex items-center gap-4">
+            {SOCIALS.map(({ href, icon: Icon, label }) => (
+              <motion.a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                aria-label={label}
+                className="transition-colors duration-200"
+                style={{ color: 'var(--muted)' }}
+                whileHover={{ y: -2 }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = 'var(--accent-g)';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.color = 'var(--muted)';
+                }}
+              >
+                <Icon className="w-4 h-4" />
+              </motion.a>
+            ))}
+          </div>
+        </div>
 
-                    {/* Social Links */}
-                    <div className="space-y-4">
-                        <h4 className="text-lg font-semibold text-white">Connect</h4>
-                        <div className="flex space-x-4">
-                            <motion.a
-                                href="https://github.com/Phomhado"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-colors"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <FaGithub className="w-6 h-6" />
-                            </motion.a>
-                            <motion.a
-                                href="https://www.linkedin.com/in/pedro-he-oli-dev"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-colors"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <FaLinkedin className="w-6 h-6" />
-                            </motion.a>
-                            <motion.a
-                                href="mailto:pedro.he.oli10@gmail.com"
-                                className="text-gray-400 hover:text-white transition-colors"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <FaEnvelope className="w-6 h-6" />
-                            </motion.a>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Copyright */}
-                <div className="mt-12 pt-8 border-t border-gray-800">
-                    <p className="text-center text-sm text-gray-400">
-                        © {currentYear} Pedro Oliveira. All rights reserved.
-                    </p>
-                </div>
-            </div>
-        </footer>
-    );
-};
-
-export default Footer;
+        {/* Copyright */}
+        <div
+          className="mt-8 pt-6 flex items-center justify-between"
+          style={{ borderTop: '1px solid var(--border)' }}
+        >
+          <p
+            className="font-mono text-[0.65rem] tracking-wider"
+            style={{ color: 'var(--muted)' }}
+          >
+            © {year} PEDRO OLIVEIRA
+          </p>
+          <p
+            className="font-mono text-[0.65rem] tracking-wider"
+            style={{ color: 'var(--border-hi)' }}
+          >
+            CODING IT AND LOVING IT
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

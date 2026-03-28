@@ -1,28 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0A0A0A;
+  --surface: #111111;
+  --border: #1A1A1A;
+  --border-hi: #2A2A2A;
+  --accent-r: #FF3B00;
+  --accent-g: #00FF94;
+  --accent-y: #FFE600;
+  --fg: #F0F0F0;
+  --muted: #777777;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-surface: var(--surface);
+  --color-border-hi: var(--border-hi);
+  --color-accent-r: var(--accent-r);
+  --color-accent-g: var(--accent-g);
+  --color-accent-y: var(--accent-y);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans, system-ui, sans-serif);
 }
 
 @layer base {
@@ -31,8 +44,68 @@ body {
   }
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
   }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+}
+
+/* ── Skill tile hover (avoids React re-renders) ─────────────────────────── */
+.skill-tile {
+  background: transparent;
+  transition: background 0.15s ease;
+}
+.skill-tile:hover {
+  background: var(--fg);
+}
+.skill-tile:hover .skill-tile-icon {
+  color: var(--bg) !important;
+}
+.skill-tile:hover .skill-tile-label {
+  color: var(--bg);
+}
+
+/* ── Project row hover (avoids React re-renders) ────────────────────────── */
+.project-row {
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.project-row:hover {
+  background: var(--surface);
+}
+.project-number {
+  color: var(--border-hi);
+  transition: color 0.2s ease;
+}
+.project-row:hover .project-number {
+  color: var(--accent-r);
+}
+.project-arrow {
+  color: var(--muted);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.project-row:hover .project-arrow {
+  color: var(--accent-r);
+  transform: translate(3px, -3px);
+}
+.project-github {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.project-row:hover .project-github {
+  opacity: 1;
 }

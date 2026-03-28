@@ -3,82 +3,126 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-const CallToAction = () => {
-  return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <motion.h2 
-            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Wanna talk or have any questions?
-          </motion.h2>
-          
-          <motion.p 
-            className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            You can explore my journey as a Dev and even see some of my projects below!
-          </motion.p>
-
-          <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Link 
-              href="/experience"
-              className="group relative px-8 py-4 bg-blue-600 text-white rounded-lg overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-              <span className="relative flex items-center gap-2">
-                View Experience
-                <svg 
-                  className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </Link>
-
-            <Link 
-              href="/projects"
-              className="group relative px-8 py-4 bg-white text-gray-900 rounded-lg border-2 border-gray-200 hover:border-blue-600 transition-colors"
-            >
-              <span className="relative flex items-center gap-2">
-                See Projects
-                <svg 
-                  className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </Link>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+const clipReveal = {
+  hidden: { clipPath: 'inset(100% 0% 0% 0%)' },
+  visible: (i: number) => ({
+    clipPath: 'inset(0% 0% 0% 0%)',
+    transition: {
+      duration: 0.7,
+      delay: i * 0.1,
+      ease: [0.77, 0, 0.175, 1],
+    },
+  }),
 };
 
-export default CallToAction; 
+export default function CallToAction() {
+  return (
+    <section
+      className="py-24 px-6 sm:px-10 lg:px-16"
+      style={{
+        background: 'var(--accent-r)',
+        borderBottom: '1px solid var(--border-hi)',
+      }}
+    >
+      {/* Section label */}
+      <div className="overflow-hidden mb-8">
+        <motion.span
+          className="block font-mono text-xs tracking-[0.25em] uppercase"
+          style={{ color: 'rgba(10,10,10,0.5)' }}
+          custom={0}
+          variants={clipReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          03 / Contact
+        </motion.span>
+      </div>
+
+      {/* Heading */}
+      <div className="overflow-hidden mb-12">
+        <motion.h2
+          className="font-mono font-black tracking-tight leading-none"
+          style={{
+            fontSize: 'clamp(3rem, 9vw, 8rem)',
+            color: 'var(--bg)',
+          }}
+          custom={1}
+          variants={clipReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          LET&apos;S TALK
+        </motion.h2>
+      </div>
+
+      {/* Sub text */}
+      <div className="overflow-hidden mb-14">
+        <motion.p
+          className="font-mono text-sm max-w-md"
+          style={{ color: 'rgba(10,10,10,0.65)' }}
+          custom={2}
+          variants={clipReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Explore my journey as a dev and see some of my projects.
+        </motion.p>
+      </div>
+
+      {/* Buttons */}
+      <motion.div
+        className="flex flex-col sm:flex-row items-start gap-4"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.35, duration: 0.5 }}
+      >
+        <Link
+          href="/experience"
+          className="group font-mono text-xs font-bold tracking-[0.15em] uppercase px-7 py-3.5 transition-all duration-200"
+          style={{
+            background: 'var(--bg)',
+            color: 'var(--fg)',
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget;
+            el.style.background = 'var(--fg)';
+            el.style.color = 'var(--bg)';
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget;
+            el.style.background = 'var(--bg)';
+            el.style.color = 'var(--fg)';
+          }}
+        >
+          View Experience ↗
+        </Link>
+
+        <Link
+          href="/projects"
+          className="group font-mono text-xs font-bold tracking-[0.15em] uppercase px-7 py-3.5 transition-all duration-200"
+          style={{
+            border: '1px solid var(--bg)',
+            color: 'var(--bg)',
+            background: 'transparent',
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget;
+            el.style.background = 'var(--bg)';
+            el.style.color = 'var(--accent-r)';
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget;
+            el.style.background = 'transparent';
+            el.style.color = 'var(--bg)';
+          }}
+        >
+          See Projects ↗
+        </Link>
+      </motion.div>
+    </section>
+  );
+}
