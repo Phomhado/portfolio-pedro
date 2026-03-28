@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
+  const [isTouch, setIsTouch] = useState(true);
+
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
   const dotOpacity = useMotionValue(0);
@@ -19,6 +21,10 @@ export default function CustomCursor() {
   const smoothRingSize = useSpring(ringSize, { damping: 20, stiffness: 300 });
 
   useEffect(() => {
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    setIsTouch(!hasFinePointer);
+    if (!hasFinePointer) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -55,6 +61,8 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, [mouseX, mouseY, dotOpacity, ringOpacity, dotScale, ringSize]);
+
+  if (isTouch) return null;
 
   return (
     <>

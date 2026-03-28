@@ -82,7 +82,7 @@ export default function CallToAction() {
       >
         <Link
           href="/experience"
-          className="group font-mono text-xs font-bold tracking-[0.15em] uppercase px-7 py-3.5 transition-all duration-200"
+          className="group font-mono text-xs font-bold tracking-[0.15em] uppercase px-7 py-3.5 transition-all duration-200 w-full sm:w-auto text-center sm:text-left"
           style={{
             background: 'var(--bg)',
             color: 'var(--fg)',
@@ -103,7 +103,7 @@ export default function CallToAction() {
 
         <Link
           href="/projects"
-          className="group font-mono text-xs font-bold tracking-[0.15em] uppercase px-7 py-3.5 transition-all duration-200"
+          className="group font-mono text-xs font-bold tracking-[0.15em] uppercase px-7 py-3.5 transition-all duration-200 w-full sm:w-auto text-center sm:text-left"
           style={{
             border: '1px solid var(--bg)',
             color: 'var(--bg)',

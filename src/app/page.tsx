@@ -196,7 +196,7 @@ export default function Home() {
             href="https://github.com/Phomhado"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase"
+            className="flex items-center justify-center sm:justify-start gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase w-full sm:w-auto"
             style={{
               border: '1px solid var(--border-hi)',
               color: 'var(--fg)',
@@ -226,7 +226,7 @@ export default function Home() {
             href="https://www.linkedin.com/in/pedro-he-oli-dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase"
+            className="flex items-center justify-center sm:justify-start gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase w-full sm:w-auto"
             style={{
               background: 'var(--accent-r)',
               color: 'var(--bg)',
