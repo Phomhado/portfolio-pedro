@@ -1,44 +1,40 @@
 # Pedro Oliveira's Portfolio
 
-Welcome to my personal portfolio website! This is a modern, responsive web application built to showcase my projects, skills, and professional journey.
+Personal portfolio website with a brutalist modern design — raw, bold, high-contrast, and full of animations.
 
-## 🚀 Technologies & Tools
+## Tech Stack
 
-This portfolio is built using cutting-edge technologies and modern development practices:
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: TypeScript 5
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) + CSS custom properties
+- **Animations**: [Framer Motion 12](https://www.framer.com/motion/)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+- **Fonts**: IBM Plex Mono (headings) + Space Grotesk (body)
 
-- **Framework**: [Next.js 15](https://nextjs.org/) - React framework for production
-- **Language**: [TypeScript](https://www.typescriptlang.org/) - For type-safe code
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- **Animations**: [Framer Motion](https://www.framer.com/motion/) - For smooth, professional animations
-- **Icons**: [React Icons](https://react-icons.github.io/react-icons/) - Comprehensive icon library
-- **Development**: Using Turbopack for faster development experience
+## Features
 
-## ✨ Features
+- Custom cursor with spring physics and blend mode effects
+- Text scramble animation on hero name
+- Magnetic buttons with motion values
+- Clip-path reveal animations
+- Scroll progress bar
+- Animated marquee strip
+- SVG grain overlay
+- Full-screen mobile navigation with stagger animation
 
-- 🎨 Modern and clean design
-- 📱 Fully responsive layout
-- ⚡ Fast page loads and smooth transitions
-- 🎭 Beautiful animations and interactions
-- 🔍 SEO optimized
-
-## 🛠️ Development
-
-To run this project locally:
+## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Run development server
-npm run dev
+npm run dev        # Start dev server (Turbopack)
+npm run build      # Production build
+npm run typecheck  # TypeScript check
 ```
 
-Visit `http://localhost:3000` to see the result.
+Visit `http://localhost:3000`.
 
-## 📫 Contact
+## Contact
 
-Feel free to reach out to me through:
 - [LinkedIn](https://www.linkedin.com/in/pedro-henrique-de-oliveira-b4b984239)
 - [GitHub](https://github.com/Phomhado)
 - pedro.he.oli10@gmail.com
-
