@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
+import SectionMarker from '../components/SectionMarker';
 
 interface Project {
   id: string;
@@ -45,24 +46,45 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const TAG_ROTATIONS = ['-2deg', '1.5deg', '-1deg', '2.5deg', '-1.5deg', '1deg'];
+
 const ProjectRow = ({ project, index }: { project: Project; index: number }) => (
   <motion.a
     href={project.githubUrl}
     target="_blank"
     rel="noopener noreferrer"
-    className="project-row block px-6 sm:px-10 lg:px-16 py-10"
+    className="project-row block px-6 sm:px-10 lg:px-16 py-12 relative overflow-hidden"
     style={{ borderBottom: '1px solid var(--border-hi)' }}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.15 * index, duration: 0.5 }}
   >
-    <div className="flex items-start gap-6 sm:gap-10">
-      {/* Number */}
+    {/* Massive outline number */}
+    <span
+      className="absolute font-mono font-black select-none pointer-events-none leading-none project-number"
+      style={{
+        fontSize: 'clamp(6rem, 16vw, 14rem)',
+        color: 'transparent',
+        WebkitTextStroke: '1.5px var(--border-hi)',
+        right: '1rem',
+        top: '50%',
+        transform: 'translateY(-50%) rotate(-5deg)',
+        zIndex: 0,
+      }}
+    >
+      {project.number}
+    </span>
+
+    <div className="relative z-10 flex items-start gap-6 sm:gap-10">
+      {/* Inline number */}
       <span
-        className="project-number font-mono font-black leading-none shrink-0 mt-1"
-        style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}
+        className="font-mono font-black leading-none shrink-0 mt-1"
+        style={{
+          fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+          color: 'var(--accent-r)',
+        }}
       >
-        {project.number}
+        [{project.number}]
       </span>
 
       {/* Content */}
@@ -79,10 +101,14 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
           </h2>
           {project.status && (
             <span
-              className="font-mono text-[0.6rem] font-bold tracking-[0.15em] px-2 py-0.5"
+              className="font-mono text-[0.6rem] font-bold tracking-[0.15em] px-2 py-0.5 slow-spin-fast inline-block"
               style={{
-                border: '1px solid var(--accent-y)',
+                border: '2px solid var(--accent-y)',
                 color: 'var(--accent-y)',
+                background: 'var(--bg)',
+                boxShadow: '2px 2px 0 0 var(--accent-y)',
+                transformOrigin: 'center',
+                animationDuration: '12s',
               }}
             >
               {project.status}
@@ -99,13 +125,14 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
 
         {/* Tech tags */}
         <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
+          {project.technologies.map((tech, i) => (
             <span
               key={tech}
-              className="font-mono text-[0.6rem] font-medium tracking-wider px-2 py-1 uppercase"
+              className="project-tech-tag font-mono text-[0.6rem] font-medium tracking-wider px-2 py-1 uppercase"
               style={{
                 border: '1px solid var(--border-hi)',
                 color: 'var(--muted)',
+                transform: `rotate(${TAG_ROTATIONS[i % TAG_ROTATIONS.length]})`,
               }}
             >
               {tech}
@@ -127,7 +154,7 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
 
     {/* GitHub indicator */}
     <div
-      className="project-github flex items-center gap-2 mt-6"
+      className="project-github relative z-10 flex items-center gap-2 mt-6"
       style={{ color: 'var(--muted)' }}
     >
       <FaGithub className="w-3.5 h-3.5" />
@@ -141,26 +168,25 @@ export default function Projects() {
     <main style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       {/* Page header */}
       <div
-        className="px-6 sm:px-10 lg:px-16 pt-16 pb-14"
+        className="relative px-6 sm:px-10 lg:px-16 pt-12 pb-14"
         style={{ borderBottom: '1px solid var(--border-hi)' }}
       >
-        <motion.span
-          className="block font-mono text-xs tracking-[0.25em] uppercase mb-5"
-          style={{ color: 'var(--muted)' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
+        {/* Coordinate corner */}
+        <span
+          className="absolute top-3 right-4 font-mono text-[0.55rem] tracking-wider hidden sm:inline-block"
+          style={{ color: 'var(--border-hi)' }}
         >
-          04 / Projects
-        </motion.span>
+          // PROJECT_REGISTRY.git
+        </span>
 
-        <div className="overflow-hidden">
+        <SectionMarker code="04" label="PROJECTS_INDEX" ext="json" />
+
+        <div className="overflow-hidden mt-4">
           <motion.h1
             className="font-mono font-black tracking-tight"
             style={{
               fontSize: 'clamp(2.5rem, 7vw, 6.5rem)',
               color: 'var(--fg)',
-              clipPath: 'inset(0)',
             }}
             initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
             animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
@@ -179,6 +205,24 @@ export default function Projects() {
         >
           Things I&apos;ve built. Some still being hammered together.
         </motion.p>
+
+        <motion.p
+          className="mt-4 font-mono text-[0.65rem] tracking-[0.2em] uppercase"
+          style={{ color: 'var(--muted)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55 }}
+        >
+          <span style={{ color: 'var(--border-hi)' }}>[</span>
+          <span style={{ color: 'var(--accent-g)' }}> {PROJECTS.length} </span>
+          REPOSITORIES
+          <span style={{ color: 'var(--border-hi)' }}> ]</span>
+          <span style={{ color: 'var(--border-hi)' }}> · </span>
+          <span style={{ color: 'var(--accent-y)' }}>
+            {PROJECTS.filter((p) => p.status === 'IN PROGRESS').length}
+          </span>{' '}
+          IN_PROGRESS
+        </motion.p>
       </div>
 
       {/* Projects list */}
@@ -190,17 +234,22 @@ export default function Projects() {
 
       {/* Footer note */}
       <motion.div
-        className="px-6 sm:px-10 lg:px-16 py-12"
+        className="px-6 sm:px-10 lg:px-16 py-12 flex items-center gap-3"
         style={{ borderTop: '1px solid var(--border-hi)' }}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3 }}
       >
+        <span
+          className="inline-block w-1.5 h-1.5 rounded-full blink-strong"
+          style={{ background: 'var(--accent-g)' }}
+        />
         <p
           className="font-mono text-xs tracking-wider"
           style={{ color: 'var(--muted)' }}
         >
-          More projects coming. Constantly building.
+          More projects incoming. Constantly building.
         </p>
       </motion.div>
     </main>

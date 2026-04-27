@@ -9,6 +9,7 @@ import {
   SiNpm, SiYarn, SiDocker, SiPostman, SiStorybook, SiRuby, SiAmazon,
   SiMysql, SiMongodb, SiPostgresql, SiRubyonrails, SiRust, SiCplusplus, SiC,
 } from 'react-icons/si';
+import SectionMarker from './SectionMarker';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type SkillItem = {
@@ -20,12 +21,14 @@ type SkillItem = {
 type SkillCategory = {
   title: string;
   items: SkillItem[];
+  badge?: { text: string; color: 'r' | 'y' | 'g' };
 };
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const CATEGORIES: SkillCategory[] = [
   {
     title: 'Web Development',
+    badge: { text: '// FAVORITE', color: 'r' },
     items: [
       { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
       { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
@@ -38,6 +41,7 @@ const CATEGORIES: SkillCategory[] = [
   },
   {
     title: 'Low-Level',
+    badge: { text: '// LEARNING', color: 'y' },
     items: [
       { name: 'Rust', icon: SiRust, color: '#F74C00' },
       { name: 'C', icon: SiC, color: '#A8B9CC' },
@@ -79,6 +83,7 @@ const CATEGORIES: SkillCategory[] = [
   },
   {
     title: 'Databases',
+    badge: { text: '// CORE', color: 'g' },
     items: [
       { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
       { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
@@ -87,7 +92,15 @@ const CATEGORIES: SkillCategory[] = [
   },
 ];
 
-// ─── Skill Item ───────────────────────────────────────────────────────────────
+const TOTAL_SKILLS = CATEGORIES.reduce((acc, c) => acc + c.items.length, 0);
+
+const BADGE_COLOR: Record<'r' | 'y' | 'g', string> = {
+  r: 'var(--accent-r)',
+  y: 'var(--accent-y)',
+  g: 'var(--accent-g)',
+};
+
+// ─── Skill Tile ───────────────────────────────────────────────────────────────
 const SkillTile = ({ item }: { item: SkillItem }) => (
   <div
     className="skill-tile flex flex-col items-center justify-center p-4 gap-2"
@@ -112,35 +125,63 @@ const SkillTile = ({ item }: { item: SkillItem }) => (
 // ─── Skill Card ───────────────────────────────────────────────────────────────
 const SkillCard = ({ category, index }: { category: SkillCategory; index: number }) => (
   <motion.div
-    className="relative overflow-hidden p-8"
+    className="relative p-8 pt-14"
     style={{
       borderRight: '1px solid var(--border-hi)',
       borderBottom: '1px solid var(--border-hi)',
     }}
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.05 }}
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-50px' }}
+    transition={{ duration: 0.5, delay: index * 0.06 }}
   >
-    {/* Background number */}
-    <span
-      className="absolute top-2 right-4 font-mono font-black select-none pointer-events-none leading-none"
+    {/* Massive escaping outline number */}
+    <motion.span
+      className="absolute font-mono font-black select-none pointer-events-none leading-none"
       style={{
-        fontSize: '5rem',
+        fontSize: 'clamp(5rem, 12vw, 9rem)',
         color: 'transparent',
-        WebkitTextStroke: '1px var(--border-hi)',
+        WebkitTextStroke: '1.5px var(--border-hi)',
+        top: '-1.5rem',
+        right: '-0.5rem',
+        transform: index % 2 === 0 ? 'rotate(-3deg)' : 'rotate(4deg)',
+        zIndex: 0,
       }}
+      initial={{ opacity: 0, scale: 0.5 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.06 + 0.2 }}
     >
       {String(index + 1).padStart(2, '0')}
-    </span>
+    </motion.span>
 
-    {/* Category label */}
-    <p
-      className="font-mono text-xs tracking-[0.2em] uppercase mb-6 relative z-10"
-      style={{ color: 'var(--muted)' }}
-    >
-      {String(index + 1).padStart(2, '0')} · {category.title}
-    </p>
+    {/* Category label + optional sticker */}
+    <div className="relative z-10 flex items-center gap-3 flex-wrap mb-6">
+      <p
+        className="font-mono text-xs tracking-[0.2em] uppercase"
+        style={{ color: 'var(--muted)' }}
+      >
+        <span style={{ color: 'var(--accent-r)' }}>[{String(index + 1).padStart(2, '0')}]</span>{' '}
+        {category.title}
+      </p>
+      {category.badge && (
+        <motion.span
+          className="hidden sm:inline-block font-mono text-[0.55rem] font-bold tracking-[0.2em] uppercase px-2 py-1"
+          style={{
+            background: BADGE_COLOR[category.badge.color],
+            color: 'var(--bg)',
+            transform: index % 2 === 0 ? 'rotate(-4deg)' : 'rotate(3deg)',
+            boxShadow: '2px 2px 0 0 var(--bg)',
+          }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.06 + 0.4 }}
+        >
+          {category.badge.text}
+        </motion.span>
+      )}
+    </div>
 
     {/* Skills grid */}
     <div
@@ -159,42 +200,52 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 px-6 sm:px-10 lg:px-16"
+      className="relative py-20 px-6 sm:px-10 lg:px-16"
       style={{ borderBottom: '1px solid var(--border-hi)' }}
     >
       {/* Header */}
-      <motion.div
-        className="mb-16"
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        <span
-          className="font-mono text-xs tracking-[0.25em] uppercase block mb-4"
-          style={{ color: 'var(--muted)' }}
-        >
-          02 / Skills
-        </span>
-        <h2
-          className="font-mono font-black tracking-tight"
+      <div className="mb-14">
+        <SectionMarker code="02" label="SKILLS_REGISTRY" ext="json" />
+        <motion.h2
+          className="font-mono font-black tracking-tight mt-3"
           style={{
             fontSize: 'clamp(2rem, 5vw, 4rem)',
             color: 'var(--fg)',
           }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
           SKILLS &amp;{' '}
           <span style={{ color: 'var(--accent-r)' }}>EXPERTISE</span>
-        </h2>
-        <div
-          className="mt-6 max-w-xl text-sm leading-relaxed"
-          style={{ color: 'var(--muted)' }}
-        >
-          Technologies are tools. My core is Full-Stack Web Development with
-          TypeScript and Ruby on Rails. And I have a deep passion in Systems
-          Programming with Rust and C++.
+        </motion.h2>
+
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mt-6">
+          <p
+            className="max-w-xl text-sm leading-relaxed"
+            style={{ color: 'var(--muted)' }}
+          >
+            Technologies are tools. My core is Full-Stack Web Development with
+            TypeScript and Ruby on Rails. And I have a deep passion in Systems
+            Programming with Rust and C++.
+          </p>
+          {/* Live counter */}
+          <motion.div
+            className="font-mono text-[0.65rem] tracking-[0.2em] uppercase shrink-0"
+            style={{ color: 'var(--muted)' }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <span style={{ color: 'var(--border-hi)' }}>[</span>
+            <span style={{ color: 'var(--accent-g)' }}> {TOTAL_SKILLS} </span>
+            TECHNOLOGIES_TRACKED
+            <span style={{ color: 'var(--border-hi)' }}> ]</span>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Grid */}
       <div

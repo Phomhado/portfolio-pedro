@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
 import ScrollProgress from "./components/ScrollProgress";
 import Grain from "./components/Grain";
+import SystemBar from "./components/SystemBar";
+import SideRail from "./components/SideRail";
 
 const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
@@ -40,7 +42,9 @@ export default function RootLayout({
         <CustomCursor />
         <ScrollProgress />
         <Header />
-        <main className="pt-16">
+        <SystemBar />
+        <SideRail />
+        <main className="pt-16 md:pt-[5.75rem] lg:pr-9">
           {children}
         </main>
         <Footer />

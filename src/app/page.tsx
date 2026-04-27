@@ -1,67 +1,14 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Skills from './components/Skills';
 import CallToAction from './components/CallToAction';
 import Marquee from './components/Marquee';
-
-// ─── Text scramble ────────────────────────────────────────────────────────────
-const SCRAMBLE_CHARS = '!<>-_\\/[]{}=+*^?#ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-
-function useTextScramble(finalText: string, delay = 500): string {
-  const [displayText, setDisplayText] = useState(() =>
-    finalText.replace(/[^ ]/g, '_'),
-  );
-
-  useEffect(() => {
-    let rafId: number;
-    let frame = 0;
-    const totalFrames = 45;
-    const FRAME_DURATION = 35;
-    let lastTime = 0;
-
-    const timeoutId = setTimeout(() => {
-      const animate = (time: number) => {
-        if (time - lastTime < FRAME_DURATION) {
-          rafId = requestAnimationFrame(animate);
-          return;
-        }
-        lastTime = time;
-        frame++;
-        const progress = Math.min(frame / totalFrames, 1);
-        const revealedCount = Math.floor(progress * finalText.length);
-
-        const result = Array.from(finalText)
-          .map((char, i) => {
-            if (i < revealedCount) return char;
-            if (char === ' ') return ' ';
-            return SCRAMBLE_CHARS[
-              Math.floor(Math.random() * SCRAMBLE_CHARS.length)
-            ];
-          })
-          .join('');
-
-        setDisplayText(result);
-
-        if (frame < totalFrames) {
-          rafId = requestAnimationFrame(animate);
-        } else {
-          setDisplayText(finalText);
-        }
-      };
-      rafId = requestAnimationFrame(animate);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId);
-      cancelAnimationFrame(rafId);
-    };
-  }, [finalText, delay]);
-
-  return displayText;
-}
+import { useScramble } from './hooks/useScramble';
+import { useCounter } from './hooks/useCounter';
+import { useGitHubStats } from './hooks/useGitHubStats';
 
 // ─── Magnetic button ──────────────────────────────────────────────────────────
 function useMagnetic(strength = 0.35) {
@@ -101,7 +48,11 @@ const clipReveal = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Home() {
-  const scrambledName = useTextScramble('PEDRO OLIVEIRA', 600);
+  const scrambledName = useScramble('PEDRO OLIVEIRA', { delay: 600 });
+  const yearsCount = useCounter(4, { duration: 1800, delay: 1200, pad: 3 });
+  const { commits: githubCommits, repos: githubRepos } = useGitHubStats('Phomhado');
+  const projectsCount = useCounter(githubRepos, { duration: 1800, delay: 1300, pad: 3 });
+  const commitsCount = useCounter(githubCommits, { duration: 2000, delay: 1400, pad: 4 });
   const github = useMagnetic();
   const linkedin = useMagnetic();
   const year = new Date().getFullYear();
@@ -110,33 +61,69 @@ export default function Home() {
     <main style={{ background: 'var(--bg)' }}>
       {/* ── Hero ─────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-20 pb-12 overflow-hidden"
+        className="relative min-h-screen flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-12 pb-12 overflow-hidden"
         style={{ borderBottom: '1px solid var(--border-hi)' }}
       >
-        {/* Section marker */}
-        <div className="flex justify-between items-center mb-16">
+        {/* Coordinate corners */}
+        <span
+          className="absolute top-3 left-3 font-mono text-[0.55rem] tracking-wider hidden sm:block"
+          style={{ color: 'var(--border-hi)' }}
+        >
+          0,0 ┐
+        </span>
+        <span
+          className="absolute bottom-3 right-3 font-mono text-[0.55rem] tracking-wider hidden sm:block"
+          style={{ color: 'var(--border-hi)' }}
+        >
+          └ 1920,1080
+        </span>
+
+        {/* Section marker + year */}
+        <div className="flex justify-between items-center mb-12 relative z-10">
           <span
-            className="font-mono text-xs tracking-[0.25em]"
-            style={{ color: 'var(--muted)' }}
+            className="font-mono text-xs tracking-[0.25em] flex items-center gap-2"
+            style={{ color: 'var(--accent-r)' }}
           >
-            01 / INTRO
+            <span className="pulse-bracket">[</span>
+            <span style={{ color: 'var(--muted)' }}>SECTION_01 // INTRO.tsx</span>
+            <span className="pulse-bracket">]</span>
           </span>
           <span
             className="font-mono text-xs tracking-[0.25em]"
             style={{ color: 'var(--muted)' }}
           >
-            {year}
+            // {year}
           </span>
         </div>
 
+        {/* Floating tilted sticker */}
+        <motion.div
+          className="absolute right-6 sm:right-12 top-24 sm:top-28 z-10"
+          initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+          animate={{ opacity: 1, scale: 1, rotate: -5 }}
+          transition={{ delay: 1.4, duration: 0.5 }}
+        >
+          <div
+            className="font-mono text-[0.6rem] sm:text-xs font-black tracking-[0.2em] uppercase px-3 py-2 wiggle"
+            style={{
+              background: 'var(--accent-y)',
+              color: 'var(--bg)',
+              boxShadow: '4px 4px 0 0 var(--bg)',
+              ['--wiggle-base' as string]: '-5deg',
+            }}
+          >
+            // FRONTEND_DEV
+          </div>
+        </motion.div>
+
         {/* Main headings */}
-        <div className="space-y-1 mb-10">
+        <div className="space-y-1 mb-8 relative z-10">
           {(['SOFTWARE', 'ENGINEER'] as const).map((word, i) => (
             <div key={word} className="overflow-hidden">
               <motion.h1
                 className="font-mono font-black leading-none tracking-tighter"
                 style={{
-                  fontSize: 'clamp(3.2rem, 10vw, 9.5rem)',
+                  fontSize: 'clamp(3rem, 10vw, 9.5rem)',
                   color: 'var(--fg)',
                 }}
                 custom={i}
@@ -160,7 +147,7 @@ export default function Home() {
 
         {/* Scrambled name */}
         <motion.p
-          className="font-mono text-base sm:text-xl font-semibold tracking-[0.25em] mb-10"
+          className="font-mono text-base sm:text-xl font-semibold tracking-[0.25em] mb-6 relative z-10"
           style={{ color: 'var(--accent-r)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -169,8 +156,35 @@ export default function Home() {
           {scrambledName}
         </motion.p>
 
+        {/* Live counters */}
+        <motion.div
+          className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8 relative z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1 }}
+        >
+          <span className="font-mono text-[0.65rem] tracking-[0.15em] uppercase" style={{ color: 'var(--muted)' }}>
+            <span style={{ color: 'var(--border-hi)' }}>[</span>
+            <span style={{ color: 'var(--accent-g)' }}> {yearsCount} </span>
+            YRS_CODING
+            <span style={{ color: 'var(--border-hi)' }}> ]</span>
+          </span>
+          <span className="font-mono text-[0.65rem] tracking-[0.15em] uppercase" style={{ color: 'var(--muted)' }}>
+            <span style={{ color: 'var(--border-hi)' }}>[</span>
+            <span style={{ color: 'var(--accent-g)' }}> {projectsCount} </span>
+            PROJECTS_SHIPPED
+            <span style={{ color: 'var(--border-hi)' }}> ]</span>
+          </span>
+          <span className="font-mono text-[0.65rem] tracking-[0.15em] uppercase" style={{ color: 'var(--muted)' }}>
+            <span style={{ color: 'var(--border-hi)' }}>[</span>
+            <span style={{ color: 'var(--accent-g)' }}> {commitsCount} </span>
+            COMMITS_YTD
+            <span style={{ color: 'var(--border-hi)' }}> ]</span>
+          </span>
+        </motion.div>
+
         {/* Tagline */}
-        <div className="overflow-hidden mb-12">
+        <div className="overflow-hidden mb-10 relative z-10">
           <motion.p
             className="font-mono text-xs tracking-[0.2em] uppercase"
             style={{ color: 'var(--muted)' }}
@@ -185,7 +199,7 @@ export default function Home() {
 
         {/* CTA buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-start gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-start gap-4 mb-14 relative z-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
@@ -196,7 +210,7 @@ export default function Home() {
             href="https://github.com/Phomhado"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center sm:justify-start gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase w-full sm:w-auto"
+            className="hover-glitch flex items-center justify-center sm:justify-start gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase w-full sm:w-auto"
             style={{
               border: '1px solid var(--border-hi)',
               color: 'var(--fg)',
@@ -226,10 +240,11 @@ export default function Home() {
             href="https://www.linkedin.com/in/pedro-he-oli-dev"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center sm:justify-start gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase w-full sm:w-auto"
+            className="hover-glitch flex items-center justify-center sm:justify-start gap-3 px-6 py-3 font-mono text-xs font-bold tracking-[0.15em] uppercase w-full sm:w-auto"
             style={{
               background: 'var(--accent-r)',
               color: 'var(--bg)',
+              boxShadow: '4px 4px 0 0 var(--fg)',
               x: linkedin.springX,
               y: linkedin.springY,
             }}
@@ -244,7 +259,7 @@ export default function Home() {
 
         {/* Bio */}
         <motion.div
-          className="max-w-lg"
+          className="max-w-lg relative z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1 }}
@@ -271,6 +286,7 @@ export default function Home() {
             color: 'transparent',
             WebkitTextStroke: '1px var(--border-hi)',
             lineHeight: 0.9,
+            transform: 'rotate(-3deg)',
           }}
         >
           PO

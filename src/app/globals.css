@@ -36,6 +36,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans, system-ui, sans-serif);
+  overflow-x: hidden;
 }
 
 @layer base {
@@ -44,9 +45,15 @@ body {
   }
 }
 
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
 }
 
 @keyframes blink {
@@ -54,23 +61,115 @@ body {
   50% { opacity: 0; }
 }
 
+@keyframes blink-strong {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.15; }
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(var(--wiggle-base, -4deg)); }
+  50% { transform: rotate(calc(var(--wiggle-base, -4deg) + 2deg)); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skewX(0); }
+  20% { transform: skewX(-4deg); }
+  40% { transform: skewX(3deg); }
+  60% { transform: skewX(-2deg); }
+  80% { transform: skewX(1deg); }
+  100% { transform: skewX(0); }
+}
+
+@keyframes pulse-bracket {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Utilities ──────────────────────────────────────────────────────────── */
 @layer utilities {
   .animate-marquee {
     animation: marquee 30s linear infinite;
   }
-
+  .animate-marquee-vertical {
+    animation: marquee-vertical 25s linear infinite;
+  }
+  .animate-marquee-slow {
+    animation: marquee 60s linear infinite;
+  }
   .cursor-blink {
     animation: blink 1s step-end infinite;
+  }
+  .blink-strong {
+    animation: blink-strong 1.2s step-end infinite;
+  }
+  .slow-spin {
+    animation: slow-spin 18s linear infinite;
+  }
+  .slow-spin-fast {
+    animation: slow-spin 8s linear infinite;
+  }
+  .wiggle {
+    animation: wiggle 3s ease-in-out infinite;
+  }
+  .pulse-bracket {
+    animation: pulse-bracket 2s ease-in-out infinite;
+  }
+
+  /* Brutalist hard shadow (no blur) */
+  .brutalist-shadow {
+    box-shadow: 4px 4px 0 0 var(--accent-r);
+  }
+  .brutalist-shadow-fg {
+    box-shadow: 4px 4px 0 0 var(--fg);
+  }
+  .brutalist-shadow-y {
+    box-shadow: 4px 4px 0 0 var(--accent-y);
+  }
+  .brutalist-shadow-g {
+    box-shadow: 4px 4px 0 0 var(--accent-g);
+  }
+  .brutalist-shadow-sm {
+    box-shadow: 2px 2px 0 0 var(--accent-r);
+  }
+
+  /* Tilt utilities */
+  .tilt-neg-1 { transform: rotate(-1.5deg); }
+  .tilt-pos-1 { transform: rotate(1.5deg); }
+  .tilt-neg-2 { transform: rotate(-3deg); }
+  .tilt-pos-2 { transform: rotate(3deg); }
+  .tilt-neg-3 { transform: rotate(-5deg); }
+  .tilt-pos-3 { transform: rotate(5deg); }
+
+  /* Hover glitch — applies to any element with .hover-glitch */
+  .hover-glitch:hover {
+    animation: glitch-skew 0.25s ease-in-out;
+  }
+
+  /* Dashed/dotted dividers */
+  .border-dashed-hi {
+    border-style: dashed;
+    border-color: var(--border-hi);
+  }
+  .border-dotted-hi {
+    border-style: dotted;
+    border-color: var(--border-hi);
   }
 }
 
 /* ── Skill tile hover (avoids React re-renders) ─────────────────────────── */
 .skill-tile {
   background: transparent;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.2s ease;
+  position: relative;
 }
 .skill-tile:hover {
   background: var(--fg);
+  animation: glitch-skew 0.22s ease-in-out;
 }
 .skill-tile:hover .skill-tile-icon {
   color: var(--bg) !important;
@@ -83,24 +182,28 @@ body {
 .project-row {
   background: transparent;
   transition: background 0.2s ease;
+  position: relative;
 }
 .project-row:hover {
   background: var(--surface);
 }
 .project-number {
   color: var(--border-hi);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.3s ease;
+  display: inline-block;
 }
 .project-row:hover .project-number {
   color: var(--accent-r);
+  transform: rotate(-3deg) scale(1.05);
 }
 .project-arrow {
   color: var(--muted);
   transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 .project-row:hover .project-arrow {
   color: var(--accent-r);
-  transform: translate(3px, -3px);
+  transform: translate(4px, -4px) rotate(8deg);
 }
 .project-github {
   opacity: 0;
@@ -108,4 +211,46 @@ body {
 }
 .project-row:hover .project-github {
   opacity: 1;
+}
+.project-tech-tag {
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  display: inline-block;
+}
+.project-tech-tag:hover {
+  border-color: var(--accent-r) !important;
+  color: var(--accent-r) !important;
+  transform: skewX(-6deg) scale(1.05);
+}
+
+/* ── Achievement card hover ─────────────────────────────────────────────── */
+.achievement-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  background: var(--bg);
+  position: relative;
+}
+.achievement-card:hover {
+  transform: translate(-3px, -3px) rotate(0deg) !important;
+  box-shadow: 6px 6px 0 0 var(--accent-r);
+  border-color: var(--accent-r);
+}
+
+/* ── Tech sticker hover ─────────────────────────────────────────────────── */
+.tech-sticker {
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+  display: inline-block;
+}
+.tech-sticker:hover {
+  background: var(--fg);
+  color: var(--bg);
+  transform: rotate(0deg) scale(1.08) !important;
+}
+
+/* ── Mobile rotation reset ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tilt-neg-2, .tilt-pos-2,
+  .tilt-neg-3, .tilt-pos-3 {
+    transform: rotate(0deg);
+  }
+  .tilt-neg-1 { transform: rotate(-0.8deg); }
+  .tilt-pos-1 { transform: rotate(0.8deg); }
 }
