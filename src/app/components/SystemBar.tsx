@@ -1,13 +1,14 @@
 'use client';
 
+import TerminalReading from './TerminalReading';
 import { useLiveTime } from '../hooks/useLiveTime';
 
 export default function SystemBar() {
-  const time = useLiveTime();
+  const reading = useLiveTime();
 
   return (
     <div
-      className="fixed top-16 left-0 right-0 z-30 hidden md:block pointer-events-none"
+      className="system-bar fixed left-0 right-0 z-30 hidden md:block pointer-events-none"
       style={{
         background: 'var(--bg)',
         borderBottom: '1px solid var(--border-hi)',
@@ -23,9 +24,15 @@ export default function SystemBar() {
               className="inline-block w-1.5 h-1.5 rounded-full blink-strong"
               style={{ background: 'var(--accent-g)' }}
             />
-            <span style={{ color: 'var(--accent-g)' }}>LIVE</span>
+            <span style={{ color: 'var(--accent-g)' }}>CLOCK</span>
             <span style={{ color: 'var(--border-hi)' }}>·</span>
-            <span style={{ color: 'var(--muted)' }}>{time}</span>
+            {reading ? (
+              <time dateTime={`${reading.date}T${reading.time}`} className="tabular-nums">
+                {reading.date} {reading.time}
+              </time>
+            ) : (
+              <TerminalReading label="Curitiba date and time" value="loading" />
+            )}
             <span style={{ color: 'var(--border-hi)' }}>·</span>
             <span style={{ color: 'var(--muted)' }}>CURITIBA_BR-PR</span>
           </span>

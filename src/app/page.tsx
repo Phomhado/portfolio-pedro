@@ -7,7 +7,7 @@ import Skills from './components/Skills';
 import CallToAction from './components/CallToAction';
 import Marquee from './components/Marquee';
 import { useScramble } from './hooks/useScramble';
-import { useCounter } from './hooks/useCounter';
+import TerminalReading from './components/TerminalReading';
 import { useGitHubStats } from './hooks/useGitHubStats';
 
 // ─── Magnetic button ──────────────────────────────────────────────────────────
@@ -33,35 +33,17 @@ function useMagnetic(strength = 0.35) {
   return { ref, springX, springY, onMouseMove, reset };
 }
 
-// ─── Clip-path reveal variant ─────────────────────────────────────────────────
-const clipReveal = {
-  hidden: { clipPath: 'inset(100% 0% 0% 0%)' },
-  visible: (i: number) => ({
-    clipPath: 'inset(0% 0% 0% 0%)',
-    transition: {
-      duration: 0.75,
-      delay: i * 0.12,
-      ease: [0.77, 0, 0.175, 1],
-    },
-  }),
-};
-
-// ─── Component ────────────────────────────────────────────────────────────────
 export default function Home() {
   const scrambledName = useScramble('PEDRO OLIVEIRA', { delay: 600 });
-  const yearsCount = useCounter(4, { duration: 1800, delay: 1200, pad: 3 });
-  const { commits: githubCommits, repos: githubRepos } = useGitHubStats('Phomhado');
-  const projectsCount = useCounter(githubRepos, { duration: 1800, delay: 1300, pad: 3 });
-  const commitsCount = useCounter(githubCommits, { duration: 2000, delay: 1400, pad: 4 });
+  const { commits, repos } = useGitHubStats();
   const github = useMagnetic();
   const linkedin = useMagnetic();
-  const year = new Date().getFullYear();
 
   return (
     <main style={{ background: 'var(--bg)' }}>
       {/* ── Hero ─────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-12 pb-12 overflow-hidden"
+        className="relative hero-section flex flex-col justify-center px-5 sm:px-10 lg:px-16 py-8 sm:py-12 overflow-hidden"
         style={{ borderBottom: '1px solid var(--border-hi)' }}
       >
         {/* Coordinate corners */}
@@ -78,132 +60,53 @@ export default function Home() {
           └ 1920,1080
         </span>
 
-        {/* Section marker + year */}
-        <div className="flex justify-between items-center mb-12 relative z-10">
-          <span
-            className="font-mono text-xs tracking-[0.25em] flex items-center gap-2"
-            style={{ color: 'var(--accent-r)' }}
-          >
-            <span className="pulse-bracket">[</span>
-            <span style={{ color: 'var(--muted)' }}>SECTION_01 // INTRO.tsx</span>
-            <span className="pulse-bracket">]</span>
-          </span>
-          <span
-            className="font-mono text-xs tracking-[0.25em]"
-            style={{ color: 'var(--muted)' }}
-          >
-            // {year}
+        {/* Section marker */}
+        <div className="flex items-center mb-6 sm:mb-8 relative z-10">
+          <span className="font-mono text-xs tracking-widest" style={{ color: 'var(--muted)' }}>
+            [ SECTION_01 // INTRO.tsx ]
           </span>
         </div>
-
-        {/* Floating tilted sticker */}
-        <motion.div
-          className="absolute right-6 sm:right-12 top-24 sm:top-28 z-10"
-          initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
-          animate={{ opacity: 1, scale: 1, rotate: -5 }}
-          transition={{ delay: 1.4, duration: 0.5 }}
-        >
-          <div
-            className="font-mono text-[0.6rem] sm:text-xs font-black tracking-[0.2em] uppercase px-3 py-2 wiggle"
-            style={{
-              background: 'var(--accent-y)',
-              color: 'var(--bg)',
-              boxShadow: '4px 4px 0 0 var(--bg)',
-              ['--wiggle-base' as string]: '-5deg',
-            }}
-          >
-            // FRONTEND_DEV
-          </div>
-        </motion.div>
-
-        {/* Main headings */}
-        <div className="space-y-1 mb-8 relative z-10">
-          {(['SOFTWARE', 'ENGINEER'] as const).map((word, i) => (
-            <div key={word} className="overflow-hidden">
-              <motion.h1
-                className="font-mono font-black leading-none tracking-tighter"
-                style={{
-                  fontSize: 'clamp(3rem, 10vw, 9.5rem)',
-                  color: 'var(--fg)',
-                }}
-                custom={i}
-                variants={clipReveal}
-                initial="hidden"
-                animate="visible"
-              >
-                {word}
-                {i === 1 && (
-                  <span
-                    className="cursor-blink"
-                    style={{ color: 'var(--accent-r)' }}
-                  >
-                    _
-                  </span>
-                )}
-              </motion.h1>
-            </div>
-          ))}
+        <div className="relative z-10 mb-5">
+          <h1 className="hero-title font-mono font-black leading-none tracking-tighter">
+            <span className="block">FULL-STACK</span>
+            <span className="block">DEVELOPER<span aria-hidden="true" className="cursor-blink" style={{ color: 'var(--accent-r)' }}>_</span></span>
+          </h1>
+          <p className="hero-focus mt-4 inline-block px-3 py-2 font-mono text-xs font-bold uppercase tracking-widest">
+            Frontend-focused
+          </p>
         </div>
 
         {/* Scrambled name */}
-        <motion.p
+        <p
           className="font-mono text-base sm:text-xl font-semibold tracking-[0.25em] mb-6 relative z-10"
           style={{ color: 'var(--accent-r)' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
         >
-          {scrambledName}
-        </motion.p>
+          <span aria-hidden="true">{scrambledName}</span>
+          <span className="sr-only">Pedro Oliveira</span>
+        </p>
 
-        {/* Live counters */}
-        <motion.div
-          className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8 relative z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
-        >
-          <span className="font-mono text-[0.65rem] tracking-[0.15em] uppercase" style={{ color: 'var(--muted)' }}>
-            <span style={{ color: 'var(--border-hi)' }}>[</span>
-            <span style={{ color: 'var(--accent-g)' }}> {yearsCount} </span>
-            YRS_CODING
-            <span style={{ color: 'var(--border-hi)' }}> ]</span>
-          </span>
-          <span className="font-mono text-[0.65rem] tracking-[0.15em] uppercase" style={{ color: 'var(--muted)' }}>
-            <span style={{ color: 'var(--border-hi)' }}>[</span>
-            <span style={{ color: 'var(--accent-g)' }}> {projectsCount} </span>
-            PROJECTS_SHIPPED
-            <span style={{ color: 'var(--border-hi)' }}> ]</span>
-          </span>
-          <span className="font-mono text-[0.65rem] tracking-[0.15em] uppercase" style={{ color: 'var(--muted)' }}>
-            <span style={{ color: 'var(--border-hi)' }}>[</span>
-            <span style={{ color: 'var(--accent-g)' }}> {commitsCount} </span>
-            COMMITS_YTD
-            <span style={{ color: 'var(--border-hi)' }}> ]</span>
-          </span>
-        </motion.div>
+        <p className="relative z-10 mb-6 max-w-xl text-base leading-relaxed" style={{ color: 'var(--muted)' }}>
+          I build fast web interfaces with React, Next.js, and TypeScript at Banco Bari.
+          I also build backend features with Ruby on Rails.
+        </p>
 
-        {/* Tagline */}
-        <div className="overflow-hidden mb-10 relative z-10">
-          <motion.p
-            className="font-mono text-xs tracking-[0.2em] uppercase"
-            style={{ color: 'var(--muted)' }}
-            custom={3}
-            variants={clipReveal}
-            initial="hidden"
-            animate="visible"
-          >
-            Frontend Dev @Bari · Rust · C++ · Systems Engineering
-          </motion.p>
+        <div className="hero-metrics relative z-10 mb-8 font-mono">
+          <div className="hero-metric">
+            <span>Years coding</span>
+            <strong>04</strong>
+          </div>
+          <div className="hero-metric">
+            <span>GitHub repos</span>
+            <TerminalReading label="GitHub repository count" value={repos} />
+          </div>
+          <div className="hero-metric">
+            <span>All-time commits</span>
+            <TerminalReading label="All-time GitHub commit contributions" value={commits} />
+          </div>
         </div>
 
         {/* CTA buttons */}
-        <motion.div
-          className="flex flex-col sm:flex-row items-start gap-4 mb-14 relative z-10"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-        >
+        <div className="flex flex-col sm:flex-row items-start gap-4 relative z-10">
           {/* GitHub */}
           <motion.a
             ref={github.ref}
@@ -255,28 +158,7 @@ export default function Home() {
             <FaLinkedin />
             LinkedIn ↗
           </motion.a>
-        </motion.div>
-
-        {/* Bio */}
-        <motion.div
-          className="max-w-lg relative z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
-        >
-          <div
-            className="h-px w-8 mb-5"
-            style={{ background: 'var(--accent-r)' }}
-          />
-          <p
-            className="text-sm leading-relaxed"
-            style={{ color: 'var(--muted)' }}
-          >
-            Software Engineer with a strong foundation in Web Development and a
-            deep passion for Systems Engineering. Building high-performance Web
-            interfaces while exploring Low-Level programming with Rust and C++.
-          </p>
-        </motion.div>
+        </div>
 
         {/* Decorative background text */}
         <div

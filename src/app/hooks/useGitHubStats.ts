@@ -2,97 +2,48 @@
 
 import { useEffect, useState } from 'react';
 
-interface GitHubStats {
-  commits: number;
-  repos: number;
-  loading: boolean;
+type Metric = number | 'loading' | 'unavailable';
+
+function readMetric(value: unknown): Metric {
+  return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0
+    ? value
+    : 'unavailable';
 }
 
-export function useGitHubStats(username: string = 'Phomhado'): GitHubStats {
-  const [stats, setStats] = useState<GitHubStats>({
-    commits: 0,
-    repos: 0,
-    loading: true,
+export function useGitHubStats() {
+  const [stats, setStats] = useState<{ repos: Metric; commits: Metric }>({
+    repos: 'loading',
+    commits: 'loading',
   });
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const controller = new AbortController();
+    let active = true;
+    const timeoutId = window.setTimeout(() => controller.abort(), 14000);
+
+    async function load() {
       try {
-        // Fetch public repos count
-        const reposRes = await fetch(
-          `https://api.github.com/users/${username}?per_page=1`,
-          {
-            headers: {
-              'Accept': 'application/vnd.github.v3+json',
-            },
-          }
-        );
-        const reposData = await reposRes.json();
-        const publicRepos = reposData.public_repos ?? 0;
+        const response = await fetch('/api/github-stats', { signal: controller.signal });
+        if (!response.ok) throw new Error('GitHub stats unavailable');
 
-        // Fetch all commits ever made by the user
-        // Sum commits across all repos owned by the user
-        const allReposRes = await fetch(
-          `https://api.github.com/users/${username}/repos?per_page=100&type=owner&sort=updated`,
-          {
-            headers: {
-              'Accept': 'application/vnd.github.v3+json',
-            },
-          }
-        );
-
-        let totalCommits = 0;
-
-        if (allReposRes.ok) {
-          const allRepos = await allReposRes.json();
-          // Iterate through repos and count commits
-          for (const repo of allRepos) {
-            try {
-              const repoCommitsRes = await fetch(
-                `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=1`,
-                {
-                  headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                  },
-                }
-              );
-              if (repoCommitsRes.ok) {
-                const linkHeader = repoCommitsRes.headers.get('link');
-                if (linkHeader) {
-                  // Extract last page number from Link header
-                  const match = linkHeader.match(/&page=(\d+)>; rel="last"/);
-                  if (match) {
-                    totalCommits += parseInt(match[1], 10);
-                  }
-                } else {
-                  // If no pagination, only 1 commit or fewer
-                  const commits = await repoCommitsRes.json();
-                  totalCommits += Array.isArray(commits) ? commits.length : 0;
-                }
-              }
-            } catch (e) {
-              // Silently fail on individual repo queries
-            }
-          }
+        const data = await response.json();
+        if (active) {
+          setStats({ repos: readMetric(data.repos), commits: readMetric(data.commits) });
         }
-
-        setStats({
-          commits: totalCommits > 0 ? totalCommits : 42,
-          repos: publicRepos,
-          loading: false,
-        });
-      } catch (error) {
-        console.error('Failed to fetch GitHub stats:', error);
-        setStats({
-          commits: 42,
-          repos: 3,
-          loading: false,
-        });
+      } catch {
+        if (active) setStats({ repos: 'unavailable', commits: 'unavailable' });
+      } finally {
+        window.clearTimeout(timeoutId);
       }
-    };
+    }
 
-    fetchStats();
-  }, [username]);
+    void load();
+    return () => {
+      active = false;
+      window.clearTimeout(timeoutId);
+      controller.abort();
+    };
+  }, []);
 
   return stats;
 }
