@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  --header-height: 4rem;
+  --system-bar-height: 0rem;
+  --site-top: calc(var(--header-height) + var(--system-bar-height));
   --bg: #0A0A0A;
   --surface: #111111;
   --border: #1A1A1A;
@@ -9,7 +12,7 @@
   --accent-g: #00FF94;
   --accent-y: #FFE600;
   --fg: #F0F0F0;
-  --muted: #777777;
+  --muted: #A1A1AA;
 }
 
 @theme inline {
@@ -253,4 +256,78 @@ body {
   }
   .tilt-neg-1 { transform: rotate(-0.8deg); }
   .tilt-pos-1 { transform: rotate(0.8deg); }
+}
+
+.site-content { padding-block-start: var(--site-top); }
+.system-bar { top: var(--header-height); }
+.mobile-menu { padding-block: calc(var(--header-height) + 1rem) 1.5rem; }
+.hero-section { min-height: calc(100svh - var(--site-top)); }
+.hero-title { font-size: clamp(1.875rem, 9.5vw, 8rem); }
+.hero-focus { background: var(--accent-y); color: var(--bg); }
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  width: min(100%, 34rem);
+}
+
+.hero-metric {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  padding: 0.625rem;
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.hero-metric strong,
+.terminal-reading {
+  color: var(--accent-g);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.terminal-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--muted);
+}
+
+.terminal-reading:has(noscript span) .terminal-loading { display: none; }
+.terminal-offline { color: var(--muted); }
+
+.terminal-scan {
+  width: 1.125rem;
+  height: 0.55rem;
+  background: repeating-linear-gradient(90deg, var(--accent-g) 0 2px, transparent 2px 4px);
+  animation: terminal-scan 1.15s steps(5, end) infinite;
+}
+
+@keyframes terminal-scan {
+  from { clip-path: inset(0 85% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@media (min-width: 30rem) {
+  .hero-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 48rem) {
+  :root { --system-bar-height: 1.75rem; }
+  .mobile-menu { display: none; }
+}
+
+@media (min-width: 48rem) and (min-height: 38rem) {
+  .experience-role { position: sticky; top: var(--site-top); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal-scan,
+  .cursor-blink,
+  .blink-strong { animation: none; }
 }

@@ -27,7 +27,7 @@ type SkillCategory = {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const CATEGORIES: SkillCategory[] = [
   {
-    title: 'Web Development',
+    title: 'Frontend Development',
     badge: { text: '// FAVORITE', color: 'r' },
     items: [
       { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
@@ -36,16 +36,6 @@ const CATEGORIES: SkillCategory[] = [
       { name: 'Next.js', icon: SiNextdotjs, color: '#F0F0F0' },
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
       { name: 'Styled Comp.', icon: SiStyledcomponents, color: '#DB7093' },
-      { name: 'Ruby on Rails', icon: SiRuby, color: '#CC342D' },
-    ],
-  },
-  {
-    title: 'Low-Level',
-    badge: { text: '// LEARNING', color: 'y' },
-    items: [
-      { name: 'Rust', icon: SiRust, color: '#F74C00' },
-      { name: 'C', icon: SiC, color: '#A8B9CC' },
-      { name: 'C++', icon: SiCplusplus, color: '#00599C' },
     ],
   },
   {
@@ -82,12 +72,21 @@ const CATEGORIES: SkillCategory[] = [
     ],
   },
   {
-    title: 'Databases',
-    badge: { text: '// CORE', color: 'g' },
+    title: 'Backend & Databases',
     items: [
+      { name: 'Ruby on Rails', icon: SiRuby, color: '#CC342D' },
       { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
       { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
       { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
+    ],
+  },
+  {
+    title: 'Systems Programming',
+    badge: { text: '// LEARNING', color: 'y' },
+    items: [
+      { name: 'Rust', icon: SiRust, color: '#F74C00' },
+      { name: 'C', icon: SiC, color: '#A8B9CC' },
+      { name: 'C++', icon: SiCplusplus, color: '#00599C' },
     ],
   },
 ];
@@ -185,7 +184,7 @@ const SkillCard = ({ category, index }: { category: SkillCategory; index: number
 
     {/* Skills grid */}
     <div
-      className="grid grid-cols-3 sm:grid-cols-4 relative z-10"
+      className="grid grid-cols-2 min-[380px]:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 xl:grid-cols-4 relative z-10"
       style={{ borderLeft: '1px solid var(--border-hi)', borderTop: '1px solid var(--border-hi)' }}
     >
       {category.items.map((item) => (
@@ -223,12 +222,12 @@ export default function Skills() {
 
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mt-6">
           <p
-            className="max-w-xl text-sm leading-relaxed"
+            className="max-w-xl text-base leading-relaxed"
             style={{ color: 'var(--muted)' }}
           >
-            Technologies are tools. My core is Full-Stack Web Development with
-            TypeScript and Ruby on Rails. And I have a deep passion in Systems
-            Programming with Rust and C++.
+            My focus is frontend development with React, Next.js, and TypeScript.
+            Ruby on Rails rounds out my web stack, and I explore systems
+            programming with Rust and C++ on the side.
           </p>
           {/* Live counter */}
           <motion.div

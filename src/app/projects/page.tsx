@@ -11,7 +11,7 @@ interface Project {
   description: string;
   technologies: string[];
   githubUrl: string;
-  status?: 'IN PROGRESS';
+  isPrivate?: boolean;
 }
 
 const PROJECTS: Project[] = [
@@ -32,7 +32,6 @@ const PROJECTS: Project[] = [
       'Full-stack to-do application with a Ruby on Rails/PostgreSQL backend and a TypeScript/Next.js frontend. Features user authentication, JWT-based security, and full CRUD operations.',
     technologies: ['Ruby', 'Rails', 'PostgreSQL', 'TypeScript', 'Next.js', 'JWT'],
     githubUrl: 'https://github.com/Phomhado/todo-app',
-    status: 'IN PROGRESS',
   },
   {
     id: 'sentinel',
@@ -42,7 +41,16 @@ const PROJECTS: Project[] = [
       'Task Manager webapp with Rust/Tauri backend and React/TypeScript frontend. Monitor memory, CPU, disk usage and terminate tasks with live system updates.',
     technologies: ['Rust', 'Tauri', 'TypeScript', 'React', 'Vite'],
     githubUrl: 'https://github.com/Phomhado/sentinel',
-    status: 'IN PROGRESS',
+  },
+  {
+    id: 'quote-shield',
+    number: '04',
+    title: 'QUOTE SHIELD',
+    description:
+      'Quote Shield is a private project focused solely on multi-agent AI coding and testing different virtual environments.',
+    technologies: ['Multi-agent AI', 'Virtual environments'],
+    githubUrl: 'https://github.com/Phomhado/quote-shield',
+    isPrivate: true,
   },
 ];
 
@@ -75,7 +83,7 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
       {project.number}
     </span>
 
-    <div className="relative z-10 flex items-start gap-6 sm:gap-10">
+    <div className="relative z-10 flex flex-col items-start gap-3 sm:flex-row sm:gap-8">
       {/* Inline number */}
       <span
         className="font-mono font-black leading-none shrink-0 mt-1"
@@ -99,25 +107,10 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
           >
             {project.title}
           </h2>
-          {project.status && (
-            <span
-              className="font-mono text-[0.6rem] font-bold tracking-[0.15em] px-2 py-0.5 slow-spin-fast inline-block"
-              style={{
-                border: '2px solid var(--accent-y)',
-                color: 'var(--accent-y)',
-                background: 'var(--bg)',
-                boxShadow: '2px 2px 0 0 var(--accent-y)',
-                transformOrigin: 'center',
-                animationDuration: '12s',
-              }}
-            >
-              {project.status}
-            </span>
-          )}
         </div>
 
         <p
-          className="text-sm leading-relaxed mb-5 max-w-2xl"
+          className="text-base leading-relaxed mb-5 max-w-2xl"
           style={{ color: 'var(--muted)' }}
         >
           {project.description}
@@ -142,7 +135,7 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
       </div>
 
       {/* Arrow */}
-      <div className="shrink-0 flex items-center justify-center mt-2">
+      <div className="hidden shrink-0 items-center justify-center mt-2 sm:flex">
         <span
           className="project-arrow font-mono font-bold"
           style={{ fontSize: '1.5rem' }}
@@ -158,7 +151,9 @@ const ProjectRow = ({ project, index }: { project: Project; index: number }) => 
       style={{ color: 'var(--muted)' }}
     >
       <FaGithub className="w-3.5 h-3.5" />
-      <span className="font-mono text-xs tracking-wider">View on GitHub</span>
+      <span className="font-mono text-xs tracking-wider">
+        {project.isPrivate ? 'Private repository on GitHub' : 'View on GitHub'}
+      </span>
     </div>
   </motion.a>
 );
@@ -203,7 +198,7 @@ export default function Projects() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          Things I&apos;ve built. Some still being hammered together.
+          Things I&apos;ve built.
         </motion.p>
 
         <motion.p
@@ -217,11 +212,6 @@ export default function Projects() {
           <span style={{ color: 'var(--accent-g)' }}> {PROJECTS.length} </span>
           REPOSITORIES
           <span style={{ color: 'var(--border-hi)' }}> ]</span>
-          <span style={{ color: 'var(--border-hi)' }}> · </span>
-          <span style={{ color: 'var(--accent-y)' }}>
-            {PROJECTS.filter((p) => p.status === 'IN PROGRESS').length}
-          </span>{' '}
-          IN_PROGRESS
         </motion.p>
       </div>
 

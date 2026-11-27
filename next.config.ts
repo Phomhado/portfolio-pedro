@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  experimental: { useTypeScriptCli: true },
   images: {
-    domains: ['github.com', 'linkedin.com'],
+    remotePatterns: ['github.com', 'linkedin.com'].map((hostname) => ({
+      protocol: 'https' as const,
+      hostname,
+    })),
   },
 };
 

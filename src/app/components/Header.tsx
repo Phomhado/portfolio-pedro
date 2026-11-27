@@ -39,14 +39,14 @@ export default function Header() {
   return (
     <>
       <header
-        className="fixed w-full z-50"
+        className="site-header fixed inset-x-0 top-0 z-50"
         style={{
           background: 'var(--bg)',
           borderBottom: '1px solid var(--border-hi)',
         }}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-[var(--header-height)]">
             {/* Logo */}
             <Link
               href="/"
@@ -88,9 +88,10 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden font-mono text-xs tracking-widest uppercase"
+              className="md:hidden min-h-11 px-2 font-mono text-xs tracking-widest uppercase"
               style={{ color: 'var(--muted)' }}
               onClick={handleMenuToggle}
+              aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? 'CLOSE' : 'MENU'}
@@ -104,14 +105,14 @@ export default function Header() {
         {isMenuOpen && (
           <motion.div
             key="mobile-menu"
-            className="fixed inset-0 z-40 md:hidden flex flex-col justify-center px-10"
+            className="mobile-menu fixed inset-0 z-40 md:hidden overflow-y-auto px-6 sm:px-10"
             style={{ background: 'var(--bg)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <nav className="flex flex-col gap-10">
+            <nav className="flex flex-col gap-5 sm:gap-8">
               {NAV_ITEMS.map((item, i) => (
                 <motion.div
                   key={item.href}

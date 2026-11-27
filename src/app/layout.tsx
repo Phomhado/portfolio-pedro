@@ -24,8 +24,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Pedro Oliveira - Portfolio",
-  description: "Personal portfolio of Pedro Oliveira",
+  title: "Pedro Oliveira | Frontend-Focused Full-Stack Developer",
+  description: "Pedro Oliveira builds frontend experiences with React, Next.js, and TypeScript and works across the stack with Ruby on Rails.",
 };
 
 export default function RootLayout({
@@ -44,9 +44,9 @@ export default function RootLayout({
         <Header />
         <SystemBar />
         <SideRail />
-        <main className="pt-16 md:pt-[5.75rem] lg:pr-9">
+        <div className="site-content lg:pr-9">
           {children}
-        </main>
+        </div>
         <Footer />
       </body>
     </html>

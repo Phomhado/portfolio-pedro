@@ -81,7 +81,7 @@ export default function Experience() {
     <main style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       {/* Page header */}
       <div
-        className="relative px-6 sm:px-10 lg:px-16 pt-12 pb-14"
+        className="relative px-6 sm:px-10 lg:px-16 pt-6 pb-7 sm:pt-8 sm:pb-9"
         style={{ borderBottom: '1px solid var(--border-hi)' }}
       >
         {/* Coordinate corner */}
@@ -96,7 +96,7 @@ export default function Experience() {
 
         <div className="overflow-hidden mt-4">
           <motion.h1
-            className="font-mono font-black tracking-tight"
+            className="font-mono font-black tracking-tight leading-none"
             style={{
               fontSize: 'clamp(2.5rem, 7vw, 6.5rem)',
               color: 'var(--fg)',
@@ -129,7 +129,7 @@ export default function Experience() {
       </div>
 
       {/* Experience entry */}
-      <div ref={containerRef} className="relative px-6 sm:px-10 lg:px-16 py-16">
+      <div ref={containerRef} className="relative px-6 sm:px-10 lg:px-16 py-6 sm:py-9">
         {/* Vertical side marquee — desktop only */}
         <div
           className="hidden xl:flex absolute left-2 top-0 bottom-0 overflow-hidden items-center justify-center pointer-events-none"
@@ -200,8 +200,8 @@ export default function Experience() {
           </span>
         </motion.div>
 
-        {/* Sticky-pinned role title */}
-        <div className="sticky top-[5.75rem] md:top-[6.25rem] z-20 -mx-6 sm:-mx-10 lg:-mx-16 px-6 sm:px-10 lg:px-16 py-4 mb-10"
+        {/* Role title */}
+        <div className="experience-role z-20 -mx-6 sm:-mx-10 lg:-mx-16 px-6 sm:px-10 lg:px-16 py-4 mb-6 sm:mb-8"
           style={{
             background: 'var(--bg)',
             borderBottom: '1px solid var(--border-hi)',
@@ -241,7 +241,7 @@ export default function Experience() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Responsibilities */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -264,7 +264,7 @@ export default function Experience() {
               {RESPONSIBILITIES.map((item, i) => (
                 <motion.li
                   key={i}
-                  className="flex items-start gap-3 text-sm leading-relaxed"
+                  className="flex items-start gap-3 text-base leading-relaxed"
                   style={{ color: 'var(--fg)' }}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -305,7 +305,7 @@ export default function Experience() {
               {ACHIEVEMENTS.map((item, i) => (
                 <motion.div
                   key={i}
-                  className="achievement-card relative p-5 pt-6"
+                  className="achievement-card relative overflow-hidden p-5 pt-6"
                   style={{
                     border: '1px solid var(--border-hi)',
                     transform: `rotate(${TILTS[i % TILTS.length]})`,
@@ -338,7 +338,7 @@ export default function Experience() {
                     [{String(i + 1).padStart(2, '0')}]
                   </span>
                   <p
-                    className="relative z-10 text-sm leading-relaxed"
+                    className="relative z-10 text-base leading-relaxed"
                     style={{ color: 'var(--muted)' }}
                   >
                     {item}

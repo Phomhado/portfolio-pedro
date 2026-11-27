@@ -10,11 +10,10 @@ export function useScramble(
 ): string {
   const { delay = 0, totalFrames = 45, frameDuration = 35 } = options;
 
-  const [displayText, setDisplayText] = useState(() =>
-    finalText.replace(/[^ ]/g, '_'),
-  );
+  const [displayText, setDisplayText] = useState(finalText);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let rafId: number;
     let frame = 0;
     let lastTime = 0;

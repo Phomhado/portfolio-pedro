@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { NAV_ITEMS } from '@/constants';
+import TerminalReading from './TerminalReading';
 import { useLiveTime } from '../hooks/useLiveTime';
 
 const SOCIALS = [
@@ -20,13 +21,13 @@ const STATUS_MESSAGES = [
   'BUILT_WITH: Next.js + ❤',
   'BUILT_WITH: Framer Motion',
   'BUILT_WITH: Tailwind CSS v4',
-  'BUILT_WITH: TypeScript 5',
+  'BUILT_WITH: TypeScript 7',
   'BUILT_WITH: caffeine + curiosity',
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const time = useLiveTime();
+  const reading = useLiveTime();
 
   return (
     <footer
@@ -48,16 +49,20 @@ export default function Footer() {
             />
             <span style={{ color: 'var(--accent-g)' }}>STATUS:ONLINE</span>
             <span style={{ color: 'var(--border-hi)' }}>·</span>
-            <span style={{ color: 'var(--muted)' }}>SYS_TIME {time}</span>
+            <span style={{ color: 'var(--muted)' }}>
+              {reading ? (
+                <time dateTime={`${reading.date}T${reading.time}`} className="tabular-nums">
+                  {reading.date} {reading.time}
+                </time>
+              ) : (
+                <TerminalReading label="Curitiba date and time" value="loading" />
+              )}
+            </span>
           </span>
-          <span className="overflow-hidden whitespace-nowrap" style={{ maxWidth: '40%' }}>
+          <span className="hidden overflow-hidden whitespace-nowrap sm:block" style={{ maxWidth: '40%' }}>
             <span className="inline-block animate-marquee-slow" style={{ color: 'var(--muted)' }}>
               {STATUS_MESSAGES.join(' · ') + ' · '}{STATUS_MESSAGES.join(' · ') + ' · '}
             </span>
-          </span>
-          <span style={{ color: 'var(--muted)' }}>
-            LAST_BUILD:{' '}
-            <span style={{ color: 'var(--accent-r)' }}>{year}.04.26</span>
           </span>
         </div>
       </div>
@@ -139,7 +144,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div
-          className="mt-8 pt-6 flex items-center justify-between"
+          className="mt-8 pt-6 flex flex-wrap items-center justify-between gap-3"
           style={{ borderTop: '1px solid var(--border)' }}
         >
           <p

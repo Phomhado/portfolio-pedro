@@ -4,8 +4,8 @@ Personal portfolio website with a brutalist modern design — raw, bold, high-co
 
 ## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-- **Language**: TypeScript 5
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: TypeScript 7
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) + CSS custom properties
 - **Animations**: [Framer Motion 12](https://www.framer.com/motion/)
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
@@ -38,3 +38,14 @@ Visit `http://localhost:3000`.
 - [LinkedIn](https://www.linkedin.com/in/pedro-henrique-de-oliveira-b4b984239)
 - [GitHub](https://github.com/Phomhado)
 - pedro.he.oli10@gmail.com
+
+## GitHub statistics
+
+Set `GITHUB_TOKEN` in `.env.local` and in the deployment environment. Use a token
+for `Phomhado` with access to the repositories you want counted and permission to
+read private contributions (a classic token uses `repo` and `read:user`). Restart
+the dev server after configuration.
+
+The homepage displays the aggregate count of repositories owned by the account
+and all-time commit contributions GitHub records for it. The API returns only
+the two totals. Stats display as unavailable without a valid token.
